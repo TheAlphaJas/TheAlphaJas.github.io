@@ -1,0 +1,133 @@
+---
+---
+
+/* 
+  Custom styling overrides for the Chirpy theme
+  with dark-blue color scheme for both light and dark modes
+*/
+
+/* Light mode customization */
+:root {
+  --body-bg: #f8fafd;
+  --text-color: #1e2b3c;
+  --heading-color: #0d2957;
+  --link-color: #1a56db;
+  --link-hover-color: #0e3ca5;
+  --sidebar-bg: #0d2957; /* Dark blue sidebar */
+  --sidebar-active-color: #ffffff;
+  --nav-cursor-color: #ffffff;
+  --button-bg: #1a56db;
+  --btn-border-color: #1a56db;
+  --btn-backtotop-color: #1a56db;
+  --btn-backtotop-border-color: #1a56db;
+  --checkbox-color: #1a56db;
+  --checkbox-checked-color: #1a56db;
+  --footer-bg: #D0E0FF; /* Light blue footer */
+  --footer-text-color: #0d2957;
+}
+
+/* Dark mode customization */
+html[data-mode="dark"] {
+  --body-bg: #0d1117;
+  --text-color: #c9d1d9;
+  --heading-color: #d0e0ff;
+  --link-color: #58a6ff;
+  --link-hover-color: #79b8ff;
+  --sidebar-bg: #0d2957; /* Keep dark blue sidebar in dark mode */
+  --sidebar-active-color: #ffffff;
+  --nav-cursor-color: #ffffff;
+  --button-bg: #1a56db;
+  --btn-border-color: #1a56db;
+  --btn-backtotop-color: #58a6ff;
+  --btn-backtotop-border-color: #58a6ff;
+  --checkbox-color: #58a6ff;
+  --checkbox-checked-color: #58a6ff;
+  --footer-bg: #1a3a6c; /* Slightly darker blue footer for dark mode */
+  --footer-text-color: #d0e0ff;
+}
+
+/* Custom styles for both modes */
+#sidebar {
+  background-color: var(--sidebar-bg) !important;
+}
+
+#sidebar .site-title a {
+  color: #ffffff;
+}
+
+#sidebar .site-subtitle {
+  color: #e0e0e0;
+  opacity: 0.9;
+}
+
+#sidebar ul.nav-item {
+  color: #ffffff;
+}
+
+#sidebar .nav-link {
+  color: #ffffff;
+}
+
+#sidebar .nav-link.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+footer {
+  background-color: var(--footer-bg) !important;
+  color: var(--footer-text-color);
+}
+
+/* Contact page social links */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Home page social links */
+.social-links-home {
+  margin: 30px 0;
+}
+
+.social-links-home a {
+  display: inline-block;
+  margin: 0 15px;
+  font-size: 1.8rem;
+  color: var(--link-color);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links-home a:hover {
+  color: var(--link-hover-color);
+  transform: scale(1.1);
+}
+
+/* Profile image styling */
+.profile-wrapper {
+  margin-bottom: 2rem;
+}
+
+.profile-img img {
+  border-radius: 50%;
+  border: 5px solid var(--link-color);
+  transition: transform 0.3s ease;
+}
+
+.profile-img img:hover {
+  transform: scale(1.05);
+}

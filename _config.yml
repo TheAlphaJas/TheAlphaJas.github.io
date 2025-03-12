@@ -1,0 +1,121 @@
+# The Site Configuration
+
+# Import the theme
+theme: jekyll-theme-chirpy
+
+# Site language
+lang: en
+
+# Your timezone
+timezone: 
+
+# Site title and tagline
+title: Jasmer Singh Sanjotra
+tagline: Algorithms | ML | Probability
+
+# Site description (used for SEO)
+description: >-
+  A personal portfolio showcasing my work in algorithmic programming,
+  probability theory, machine learning, and various other projects.
+
+# Site URL
+url: 'https://TheAlphaJas.github.io'
+
+# GitHub username
+github:
+  username: TheAlphaJas
+
+# Social media accounts
+social:
+  name: Jasmer Singh Sanjotra
+  email: jasmer.sanjotra@proton.me
+  links:
+    - https://github.com/TheAlphaJas/
+    - https://www.linkedin.com/in/jasmer-singh-sanjotra-a05b95250/
+    - https://scholar.google.com/citations?user=NUCuUbIAAAAJ
+    - https://leetcode.com/u/jasmers/
+
+# Theme mode: [light|dark]
+# Leave empty to allow user preference
+theme_mode: 
+
+# Avatar on sidebar
+avatar: '/assets/img/avatar.jpg'
+
+# Table of Contents settings
+toc: true
+
+# Pagination
+paginate: 10
+
+# Base URL - leave empty for username.github.io sites
+baseurl: ""
+
+# Collections
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ''
+      type: posts
+    values:
+      layout: post
+      comments: false
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ''
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+exclude:
+  - '*.gem'
+  - '*.gemspec'
+  - tools
+  - README.md
+  - LICENSE
+  - gulpfile.js
+  - node_modules
+  - package*.json
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
+
+# Pagination settings
+paginate: 10
+paginate_path: /posts/:num/
+
+# Archives configuration (removed categories)
+jekyll-archives:
+  enabled: [tags]
+  layouts:
+    tag: tag
+  permalinks:
+    tag: /tags/:name/

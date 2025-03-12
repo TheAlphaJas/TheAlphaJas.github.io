@@ -1,121 +1,91 @@
-# The Site Configuration
+# Theme Settings
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+minimal_mistakes_skin: "contrast" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-# Import the theme
-theme: jekyll-theme-chirpy
-
-# Site language
-lang: en
-
-# Your timezone
-timezone: 
-
-# Site title and tagline
-title: Jasmer Singh Sanjotra
-tagline: Algorithms | ML | Probability
-
-# Site description (used for SEO)
-description: >-
-  A personal portfolio showcasing my work in algorithmic programming,
-  probability theory, machine learning, and various other projects.
-
-# Site URL
-url: 'https://TheAlphaJas.github.io'
-
-# GitHub username
-github:
-  username: TheAlphaJas
-
-# Social media accounts
-social:
-  name: Jasmer Singh Sanjotra
-  email: jasmer.sanjotra@proton.me
-  links:
-    - https://github.com/TheAlphaJas/
-    - https://www.linkedin.com/in/jasmer-singh-sanjotra-a05b95250/
-    - https://scholar.google.com/citations?user=NUCuUbIAAAAJ
-    - https://leetcode.com/u/jasmers/
-
-# Theme mode: [light|dark]
-# Leave empty to allow user preference
-theme_mode: 
-
-# Avatar on sidebar
-avatar: '/assets/img/avatar.jpg'
-
-# Table of Contents settings
-toc: true
-
-# Pagination
-paginate: 10
-
-# Base URL - leave empty for username.github.io sites
+# Site Settings
+locale: "en-US"
+title: "Jasmer Sanjotra"
+subtitle: "Algorithms | ML | Probability"
+name: "Jasmer Singh Sanjotra"
+description: "Personal portfolio showcasing my work in algorithms, probability theory, machine learning, and other projects."
+url: "https://TheAlphaJas.github.io"
 baseurl: ""
+repository: "TheAlphaJas/username.github.io"
+logo: "/assets/images/profile.jpg"
+masthead_title: "Jasmer"
 
-# Collections
-collections:
-  tabs:
-    output: true
-    sort_by: order
+# Site Author
+author:
+  name: "Jasmer Singh Sanjotra"
+  avatar: "/assets/images/profile.jpg"
+  bio: "Researcher and developer focused on algorithms, probability theory, and machine learning."
+  location: "IIT Indore, India"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/username"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/username"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap"
+      url: "https://scholar.google.com/citations?user=your-id"
+    - label: "LeetCode"
+      icon: "fas fa-fw fa-code"
+      url: "https://leetcode.com/username"
 
-defaults:
-  - scope:
-      path: ''
-      type: posts
-    values:
-      layout: post
-      comments: false
-      toc: true
-      permalink: /posts/:title/
-  - scope:
-      path: _drafts
-    values:
-      comments: false
-  - scope:
-      path: ''
-      type: tabs
-    values:
-      layout: page
-      permalink: /:title/
+# Site Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/TheAlphaJas"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/jasmer-singh-sanjotra-a05b95250/"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap" 
+      url: "https://scholar.google.com/citations?user=NUCuUbIAAAAJ&hl=en"
+    - label: "LeetCode"
+      icon: "fas fa-fw fa-code"
+      url: "https://leetcode.com/jasmer"
 
+# Reading Files
+include:
+  - _pages
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Sass/SCSS
 sass:
+  sass_dir: _sass
   style: compressed
 
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  profile: false
-  blanklines: false
-  ignore:
-    envs: [development]
-
-exclude:
-  - '*.gem'
-  - '*.gemspec'
-  - tools
-  - README.md
-  - LICENSE
-  - gulpfile.js
-  - node_modules
-  - package*.json
-
-jekyll-archives:
-  enabled: [categories, tags]
-  layouts:
-    category: category
-    tag: tag
-  permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
-
-# Pagination settings
+# Outputting
+permalink: /:categories/:title/
 paginate: 10
-paginate_path: /posts/:num/
+paginate_path: /page:num/
 
-# Archives configuration (removed categories)
-jekyll-archives:
-  enabled: [tags]
-  layouts:
-    tag: tag
-  permalinks:
-    tag: /tags/:name/
+# Plugins (previously gems:)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache  # Essential for Minimal Mistakes

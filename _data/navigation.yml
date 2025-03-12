@@ -1,0 +1,20 @@
+main:
+  - title: "Home"
+    url: /home/
+  - title: "Stuff I Do"
+    url: /stuff-i-do/
+  - title: "Tags"
+    url: /tags/
+  - title: "Contact"
+    url: /contact/
+
+# Sidebar navigation for "Stuff I Do" section
+stuff-i-do:
+  - title: "Algorithmic Programming"
+    url: /algorithmic-programming/
+  - title: "Probability"
+    url: /probability/
+  - title: "ML Writeups"
+    url: /ml-writeups/
+  - title: "Other Projects"
+    url: /other-projects/

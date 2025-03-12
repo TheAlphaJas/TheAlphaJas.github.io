@@ -1,43 +1,36 @@
 ---
-title: Stuff I Do
-icon: fas fa-laptop-code
-order: 1
+permalink: /stuff-i-do/
+title: "Stuff I Do"
+toc: true
+layout: splash
+sidebar:
+  nav: "stuff-i-do"
 ---
 
-# My Work and Projects
-
-I focus on several technical areas that overlap and complement each other.
+I focus on several technical areas that overlap and complement each other. This page showcases my work across different domains.
 
 ## Algorithmic Programming
 
 I enjoy solving complex algorithmic problems and participate in competitive programming contests.
 
-[View Algorithmic Programming Posts](/posts/algorithmic-programming/)
-
----
+[Explore Algorithmic Programming](/algorithmic-programming/){: .btn .btn--info}
 
 ## Probability
 
 My work in probability theory includes statistical models, stochastic processes, and their applications.
 
-[View Probability Posts](/posts/probability/)
-
----
+[Explore Probability](/probability/){: .btn .btn--info}
 
 ## ML Writeups
 
 I create detailed explorations of machine learning concepts, implementations, and applications.
 
-[View ML Writeup Posts](/posts/ml-writeups/)
-
----
+[Explore ML Writeups](/ml-writeups/){: .btn .btn--info}
 
 ## Other Projects
 
 Miscellaneous projects spanning various domains and technologies.
 
-[View Other Projects](/posts/other-projects/)
-
----
+[Explore Other Projects](/other-projects/){: .btn .btn--info}
 
 Check out my [GitHub profile](https://github.com/username) for more open-source contributions and projects.

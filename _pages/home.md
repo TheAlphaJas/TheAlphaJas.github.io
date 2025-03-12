@@ -1,8 +1,12 @@
 ---
-title: About
-icon: fas fa-info-circle
-order: 3
+permalink: /home/
+title: "Welcome to My Portfolio"
+excerpt: "About Me"
+toc: false
+layout: splash
 ---
+
+![Profile Image](/assets/images/profile.jpg){: .align-center style="border-radius: 50%; max-width: 250px;"}
 
 Hey, I'm Jasmer Singh Sanjotra, an aspiring researcher and engineer with a strong interest in Machine Learning, Probability Theory, Causal Reinforcement Learning, Parallel and High Performace Computing. I enjoy solving complex problems, optimizing performance, and building intelligent systems.  
 

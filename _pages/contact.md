@@ -1,8 +1,12 @@
 ---
-title: Contact
-icon: fas fa-envelope
-order: 4
+permalink: /contact/
+title: "Contact"
+toc: false
+layout: splash
 ---
+
+# Get In Touch
+
 I'm always open to discussions on machine learning, reinforcement learning, parallel computing and system design. Whether it's about research, collaboration, or just a good conversation, feel free to reach out!  
 
 ## 📧 Email  

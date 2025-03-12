@@ -1,9 +1,12 @@
 ---
-title: Efficient Graph Algorithms for Competitive Programming
-date: 2023-01-15 12:00:00 +0000
-categories: [Algorithmic Programming]
-tags: [algorithms, graph-theory, competitive-programming]
-math: true
+title: "Efficient Graph Algorithms for Competitive Programming"
+categories:
+  - algorithmic-programming
+tags:
+  - algorithms
+  - graph-theory
+  - competitive-programming
+toc: true
 ---
 
 # Efficient Graph Algorithms for Competitive Programming

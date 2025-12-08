@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCSESEntries } from '../../../utils/content';
+
+const entries = getCSESEntries();
+---
+
+<BaseLayout title="CSES Problem Set | Jasmer's Corner" description="CSES Problem Set solutions and key insights.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <a href="/fun" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-6 inline-flex items-center space-x-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Fun Stuff</span>
+    </a>
+    
+    <h1 class="text-4xl font-bold mb-4">CSES Problem Set</h1>
+    
+    <div class="prose prose-slate dark:prose-invert max-w-none mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
+      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+        The CSES (Competitive Programmer's Handbook) Problem Set is a comprehensive collection of algorithmic 
+        problems designed to help programmers master fundamental computer science concepts. This problem set 
+        covers a wide range of topics including sorting, searching, dynamic programming, graph algorithms, 
+        range queries, and more.
+      </p>
+      <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+        This section contains my C++ solutions to CSES problems. Each solution includes the complete 
+        implementation with the key algorithmic approach. The problems are organized by topic, making it 
+        easy to find solutions related to specific algorithmic techniques or data structures.
+      </p>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        All solutions are available on <a href="https://github.com/TheAlphaJas/cses-sols" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-4">
+        <a
+          href="https://leetcode.com/jasmers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center space-x-2 px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 rounded-lg hover:border-slate-900 dark:hover:border-slate-100 transition-colors text-slate-700 dark:text-slate-300"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662L2.102 13.607c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.389-4.39c.467-.467 1.15-.702 1.824-.702s1.357.235 1.823.702l.331.331c.195.195.512.195.707 0l2.414-2.414c.195-.195.512-.195.707 0l.331.331c.467.467 1.15.702 1.824.702s1.357-.235 1.823-.702l4.389-4.39c.467-.467 1.15-.702 1.824-.702s1.357.235 1.824.702l2.697 2.607c.467.467.702 1.15.702 1.824s-.235 1.357-.702 1.823l-4.389 4.39c-.467.467-1.15.702-1.824.702s-1.357-.235-1.823-.702l-.331-.331c-.195-.195-.512-.195-.707 0l-2.414 2.414c-.195.195-.512.195-.707 0l-.331-.331c-.467-.467-1.15-.702-1.824-.702s-1.357.235-1.823.702l-4.389 4.39c-.467.467-.702 1.15-.702 1.824s.235 1.357.702 1.823z"/>
+          </svg>
+          <span>LeetCode</span>
+        </a>
+        <a
+          href="https://codeforces.com/profile/von_Braun"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center space-x-2 px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 rounded-lg hover:border-slate-900 dark:hover:border-slate-100 transition-colors text-slate-700 dark:text-slate-300"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.5 7.5C5.328 7.5 6 8.172 6 9v10.5c0 .828-.672 1.5-1.5 1.5h-3C.672 21 0 20.328 0 19.5V9c0-.828.672-1.5 1.5-1.5h3zm9-4.5C14.328 3 15 3.672 15 4.5v15c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5v-15c0-.828.672-1.5 1.5-1.5h3zm9 7.5C23.328 10.5 24 11.172 24 12v7.5c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5V12c0-.828.672-1.5 1.5-1.5h3z"/>
+          </svg>
+          <span>Codeforces</span>
+        </a>
+      </div>
+    </div>
+    
+    {entries.length > 0 ? (
+      <div class="space-y-4">
+        {entries.map((entry) => (
+          <a
+            href={`/fun/cses/${entry.slug}`}
+            class="block p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors bg-slate-50 dark:bg-slate-900/50"
+          >
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  {entry.problemNumber && (
+                    <span class="text-sm font-mono text-slate-500 dark:text-slate-400">
+                      #{entry.problemNumber}
+                    </span>
+                  )}
+                  <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                    {entry.problemName}
+                  </h2>
+                </div>
+                {entry.keyIdea && (
+                  <p class="text-slate-600 dark:text-slate-400 mb-3">{entry.keyIdea}</p>
+                )}
+                <div class="flex items-center gap-4 text-sm">
+                  {entry.difficulty && (
+                    <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded">
+                      {entry.difficulty}
+                    </span>
+                  )}
+                  {entry.language && (
+                    <span class="text-slate-500 dark:text-slate-400">{entry.language}</span>
+                  )}
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-slate-400 dark:text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg">
+        <p class="text-slate-600 dark:text-slate-400 mb-4">
+          No CSES problems yet. Add problems to <code class="text-sm bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">content/cses/</code>
+        </p>
+        <p class="text-sm text-slate-500 dark:text-slate-500">
+          Create Markdown files with frontmatter similar to USACO entries.
+        </p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+

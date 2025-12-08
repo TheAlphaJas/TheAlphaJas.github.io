@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Jasmer's Corner | Home" description="Research engineer and competitive programmer specializing in ML, RL, signal processing, and systems.">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="space-y-8">
+      <!-- Header with Photo -->
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+        <div class="flex-shrink-0">
+          <img
+            src="/photo.jpg"
+            alt="Jasmer Singh Sanjotra"
+            class="w-32 h-32 rounded-full object-cover border-4 border-slate-200 dark:border-slate-800"
+            onerror="this.style.display='none';"
+          />
+        </div>
+        <div class="space-y-2">
+          <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-slate-100">
+            Jasmer Singh Sanjotra
+          </h1>
+          <p class="text-xl text-slate-600 dark:text-slate-400">
+            Research Engineer & Competitive Programmer
+          </p>
+          <p class="text-sm text-slate-500 dark:text-slate-500">
+            B.Tech in Electrical Engineering, IIT Indore
+          </p>
+        </div>
+      </div>
+      
+      <!-- Introduction -->
+      <div class="prose prose-slate dark:prose-invert max-w-none pt-4">
+        <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          Welcome to my corner of the internet. I'm a research engineer and competitive programmer 
+          passionate about machine learning, deep learning, signal processing, and 6G communications. 
+          Currently pursuing my B.Tech at IIT Indore, I work on cutting-edge research in audio-visual 
+          speech enhancement, medical image segmentation, and CSI-RS processing for 6G standards.
+        </p>
+      </div>
+      
+      <!-- Site Structure Explanation -->
+      <div class="prose prose-slate dark:prose-invert max-w-none pt-6 border-t border-slate-200 dark:border-slate-800">
+        <h2 class="text-2xl font-semibold mb-4 text-slate-900 dark:text-slate-100">About This Site</h2>
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+          This website serves as both a portfolio and a knowledge repository. Here's what you'll find:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300 mb-6">
+          <li><strong>Projects:</strong> Research and engineering projects spanning machine learning, deep learning, signal processing, and systems engineering</li>
+          <li><strong>Experience:</strong> Professional timeline including internships, research positions, and teaching roles</li>
+          <li><strong>Publications:</strong> Research papers published in conferences and journals</li>
+          <li><strong>Competitive Programming:</strong> Solutions to USACO problems, CSES problem set, and other algorithmic challenges</li>
+          <li><strong>Probability Corner:</strong> A collection of interesting probability puzzles and their solutions</li>
+          <li><strong>Aviation Corner:</strong> Documentation of airlines flown, aircraft types, and aviation interests</li>
+          <li><strong>Gallery:</strong> Photos and visual documentation of various experiences and projects</li>
+        </ul>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
+        <a
+          href="/projects"
+          class="p-4 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+        >
+          <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Projects</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Research and engineering projects</p>
+        </a>
+        <a
+          href="/experience"
+          class="p-4 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+        >
+          <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Experience</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Professional timeline</p>
+        </a>
+        <a
+          href="/fun"
+          class="p-4 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+        >
+          <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Fun Stuff</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Probability, USACO, CSES, Aviation</p>
+        </a>
+        <a
+          href="/gallery"
+          class="p-4 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+        >
+          <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Gallery</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Photos and visual documentation</p>
+        </a>
+      </div>
+      
+      <!-- Competitive Programming Links -->
+      <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <p class="text-sm font-semibold text-slate-600 dark:text-slate-400 mb-3">Competitive Programming Profiles:</p>
+        <div class="flex flex-wrap gap-2">
+          <a
+            href="https://leetcode.com/jasmers"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1 px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 rounded hover:border-slate-900 dark:hover:border-slate-100 transition-colors text-slate-600 dark:text-slate-400"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662L2.102 13.607c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.389-4.39c.467-.467 1.15-.702 1.824-.702s1.357.235 1.823.702l.331.331c.195.195.512.195.707 0l2.414-2.414c.195-.195.512-.195.707 0l.331.331c.467.467 1.15.702 1.824.702s1.357-.235 1.823-.702l4.389-4.39c.467-.467 1.15-.702 1.824-.702s1.357.235 1.824.702l2.697 2.607c.467.467.702 1.15.702 1.824s-.235 1.357-.702 1.823l-4.389 4.39c-.467.467-1.15.702-1.824.702s-1.357-.235-1.823-.702l-.331-.331c-.195-.195-.512-.195-.707 0l-2.414 2.414c-.195.195-.512.195-.707 0l-.331-.331c-.467-.467-1.15-.702-1.824-.702s-1.357.235-1.823.702l-4.389 4.39c-.467.467-.702 1.15-.702 1.824s.235 1.357.702 1.823z"/>
+            </svg>
+            <span>LeetCode</span>
+          </a>
+          <a
+            href="https://codeforces.com/profile/von_Braun"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1 px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 rounded hover:border-slate-900 dark:hover:border-slate-100 transition-colors text-slate-600 dark:text-slate-400"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4.5 7.5C5.328 7.5 6 8.172 6 9v10.5c0 .828-.672 1.5-1.5 1.5h-3C.672 21 0 20.328 0 19.5V9c0-.828.672-1.5 1.5-1.5h3zm9-4.5C14.328 3 15 3.672 15 4.5v15c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5v-15c0-.828.672-1.5 1.5-1.5h3zm9 7.5C23.328 10.5 24 11.172 24 12v7.5c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5V12c0-.828.672-1.5 1.5-1.5h3z"/>
+            </svg>
+            <span>Codeforces</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

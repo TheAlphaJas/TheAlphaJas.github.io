@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InfiniteFlightStats from '../../components/InfiniteFlightStats.astro';
+import fs from 'fs';
+import path from 'path';
+
+const airlinesPath = path.join(process.cwd(), 'content', 'aviation', 'airlines.json');
+const airlines = fs.existsSync(airlinesPath) 
+  ? JSON.parse(fs.readFileSync(airlinesPath, 'utf-8'))
+  : [];
+---
+
+<BaseLayout title="Aviation Corner | Jasmer's Corner" description="Airlines flown, aircraft types, and Infinite Flight stats.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <a href="/fun" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-6 inline-flex items-center space-x-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Fun Stuff</span>
+    </a>
+    
+    <h1 class="text-4xl font-bold mb-4">Aviation Corner</h1>
+    
+    <div class="prose prose-slate dark:prose-invert max-w-none mb-12 pb-6 border-b border-slate-200 dark:border-slate-800">
+      <p class="text-slate-700 dark:text-slate-300">
+        As an aviation enthusiast, I track the airlines I've flown, the aircraft types I've experienced, 
+        and maintain my Infinite Flight statistics. This section documents my journey through the skies, 
+        from commercial flights to virtual aviation experiences. Each airline entry includes the aircraft 
+        types flown, providing a detailed record of my aviation adventures.
+      </p>
+    </div>
+    
+    <!-- Airlines Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6">Airlines Flown</h2>
+      {airlines.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {airlines.map((airline: any) => (
+            <div class="border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-300 dark:hover:border-slate-700 transition-colors bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
+              {airline.website ? (
+                <a href={airline.website} target="_blank" rel="noopener noreferrer" class="block">
+                  <div class="p-6 pb-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4">
+                      {airline.logo ? (
+                        <img
+                          src={airline.logo}
+                          alt={airline.name}
+                          class="max-w-full max-h-32 object-contain hover:opacity-80 transition-opacity"
+                          loading="lazy"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                      ) : null}
+                      <div class="w-full h-32 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center hover:opacity-80 transition-opacity" style={airline.logo ? "display: none;" : "display: flex;"}>
+                        <span class="text-4xl font-semibold text-slate-400 dark:text-slate-500">{airline.name.charAt(0)}</span>
+                      </div>
+                    </div>
+                    {airline.equipment && airline.equipment.length > 0 && (
+                      <div class="flex flex-wrap gap-1.5 justify-center">
+                        {airline.equipment.map((aircraft: string) => (
+                          <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded text-xs font-medium">
+                            {aircraft}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              ) : (
+                <div class="p-6 pb-4">
+                  <div class="w-full h-32 flex items-center justify-center mb-4">
+                    {airline.logo ? (
+                      <img
+                        src={airline.logo}
+                        alt={airline.name}
+                        class="max-w-full max-h-32 object-contain"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                      />
+                    ) : null}
+                    <div class="w-full h-32 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center" style={airline.logo ? "display: none;" : "display: flex;"}>
+                      <span class="text-4xl font-semibold text-slate-400 dark:text-slate-500">{airline.name.charAt(0)}</span>
+                    </div>
+                  </div>
+                  {airline.equipment && airline.equipment.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 justify-center">
+                      {airline.equipment.map((aircraft: string) => (
+                        <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded text-xs font-medium">
+                          {aircraft}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-slate-600 dark:text-slate-400">No airlines data available. Add airlines to <code class="text-sm bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">content/aviation/airlines.json</code></p>
+      )}
+    </section>
+    
+    <!-- Infinite Flight Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6">Infinite Flight</h2>
+      <InfiniteFlightStats />
+    </section>
+  </div>
+</BaseLayout>

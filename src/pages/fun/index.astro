@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Fun Stuff | Jasmer's Corner" description="Technical corners: probability, competitive programming, and aviation.">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-4xl font-bold mb-6">Fun Stuff</h1>
+    
+    <div class="prose prose-slate dark:prose-invert max-w-none mb-12 pb-8 border-b border-slate-200 dark:border-slate-800">
+      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+        This section contains various interests and hobbies that intrigue me beyond my core research work. 
+        Here you'll find probability puzzles I solve for fun, competitive programming solutions, and my 
+        passion for aviation. These corners represent the diverse technical curiosities that keep me 
+        engaged and learning.
+      </p>
+      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mt-4">
+        As an aviation enthusiast, I track airlines flown, aircraft types experienced, and maintain 
+        my Infinite Flight stats. The probability corner features mathematical puzzles that challenge 
+        intuition and require careful reasoning. The competitive programming sections document solutions 
+        to problems from USACO and CSES, capturing key algorithmic insights along the way.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a
+        href="/fun/probability"
+        class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+      >
+        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
+          Probability Corner
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400">
+          Mathematical probability problems with detailed solutions. Markov chains, information theory, stochastic processes.
+        </p>
+      </a>
+      
+      <a
+        href="/fun/usaco"
+        class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+      >
+        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
+          USACO / Competitive Programming
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400">
+          Competitive programming solutions and key insights. USACO problems, algorithms, and data structures.
+        </p>
+      </a>
+      
+      <a
+        href="/fun/cses"
+        class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+      >
+        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
+          CSES Problem Set
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400">
+          Solutions to problems from the CSES Problem Set. Algorithms, data structures, and competitive programming.
+        </p>
+      </a>
+      
+      <a
+        href="/fun/aviation"
+        class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+      >
+        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
+          Aviation Corner
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400">
+          Airlines flown, aircraft types, and Infinite Flight stats.
+        </p>
+      </a>
+    </div>
+  </div>
+</BaseLayout>
+

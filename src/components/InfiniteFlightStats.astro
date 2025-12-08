@@ -1,0 +1,140 @@
+---
+// Simple static display of Infinite Flight stats
+// Stats are manually updated in content/aviation/infinite-flight.json
+import fs from 'fs';
+import path from 'path';
+
+const ifConfigPath = path.join(process.cwd(), 'content', 'aviation', 'infinite-flight.json');
+let ifConfig: {
+  username?: string;
+  totalFlights?: number;
+  totalFlightTime?: number | string; // in hours (number) or "XhYm" format (string)
+  totalLandings?: number;
+  xp?: number;
+  grade?: string;
+} = {};
+
+if (fs.existsSync(ifConfigPath)) {
+  try {
+    ifConfig = JSON.parse(fs.readFileSync(ifConfigPath, 'utf-8'));
+  } catch (error) {
+    console.error('Error loading Infinite Flight config:', error);
+  }
+}
+
+function formatFlightTime(time: number | string | undefined): string {
+  if (!time) return '0 hours';
+  
+  // Handle string format like "1313h03m"
+  if (typeof time === 'string') {
+    const match = time.match(/(\d+)h(?:(\d+)m)?/);
+    if (match) {
+      const hours = parseInt(match[1], 10);
+      const minutes = match[2] ? parseInt(match[2], 10) : 0;
+      
+      if (hours === 0 && minutes === 0) return '0 hours';
+      if (hours === 0) {
+        return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+      }
+      if (minutes === 0) {
+        return `${hours.toLocaleString()} hour${hours !== 1 ? 's' : ''}`;
+      }
+      return `${hours.toLocaleString()} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    }
+    // If string doesn't match expected format, return as-is
+    return time;
+  }
+  
+  // Handle number format (hours as decimal)
+  if (typeof time === 'number') {
+    if (time === 0) return '0 hours';
+    const wholeHours = Math.floor(time);
+    const minutes = Math.floor((time - wholeHours) * 60);
+    
+    if (wholeHours === 0) {
+      return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    }
+    if (minutes === 0) {
+      return `${wholeHours.toLocaleString()} hour${wholeHours !== 1 ? 's' : ''}`;
+    }
+    return `${wholeHours.toLocaleString()} hour${wholeHours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  }
+  
+  return '0 hours';
+}
+---
+
+<div class="p-6 border-2 border-slate-200 dark:border-slate-800 rounded-lg bg-slate-50 dark:bg-slate-900/50">
+  {ifConfig.username ? (
+    <div class="space-y-6">
+      <!-- Profile Header -->
+      <div class="pb-4 border-b border-slate-200 dark:border-slate-700">
+        <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          {ifConfig.username}
+        </h3>
+        {ifConfig.grade && (
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+            Grade: <span class="font-medium">{ifConfig.grade}</span>
+          </p>
+        )}
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {ifConfig.totalFlights !== undefined && (
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Flights</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {ifConfig.totalFlights.toLocaleString()}
+            </p>
+          </div>
+        )}
+        
+        {ifConfig.totalFlightTime !== undefined && (
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Flight Time</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {formatFlightTime(ifConfig.totalFlightTime)}
+            </p>
+          </div>
+        )}
+        
+        {ifConfig.totalLandings !== undefined && (
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Landings</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {ifConfig.totalLandings.toLocaleString()}
+            </p>
+          </div>
+        )}
+        
+        {ifConfig.xp !== undefined && (
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">XP</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {ifConfig.xp.toLocaleString()}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <p class="text-xs text-slate-500 dark:text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-700">
+        Stats updated manually. Edit <code class="text-xs bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">content/aviation/infinite-flight.json</code> to update.
+      </p>
+    </div>
+  ) : (
+    <div class="space-y-4">
+      <p class="text-slate-600 dark:text-slate-400">
+        Configure your Infinite Flight stats to display them here.
+      </p>
+      <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg">
+        <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Setup Instructions:</p>
+        <ol class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-decimal list-inside">
+          <li>Edit <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">content/aviation/infinite-flight.json</code></li>
+          <li>Add your Infinite Flight username</li>
+          <li>Add your stats: <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalFlights</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalFlightTime</code> (as number in hours or string like "1313h03m"), <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalLandings</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">xp</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">grade</code></li>
+        </ol>
+      </div>
+    </div>
+  )}
+</div>

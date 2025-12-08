@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getUSACOEntries } from '../../../utils/content';
+import { renderMarkdown } from '../../../utils/markdown';
+
+export async function getStaticPaths() {
+  const entries = getUSACOEntries();
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const htmlContent = await renderMarkdown(entry.content);
+---
+
+<BaseLayout title={`${entry.problemName} | USACO`} description={`USACO problem: ${entry.problemName}`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-center gap-4 mb-6">
+      <a href="/fun" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 inline-flex items-center space-x-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span>Fun Stuff</span>
+      </a>
+      <span class="text-slate-400 dark:text-slate-600">/</span>
+      <a href="/fun/usaco" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+        USACO
+      </a>
+    </div>
+    
+    <article class="prose prose-slate dark:prose-invert max-w-none">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h1 class="text-4xl font-bold mb-2">{entry.problemName}</h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400">{entry.contest}</p>
+        </div>
+        <span class="px-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded">
+          {entry.difficulty}
+        </span>
+      </div>
+      
+      <div class="space-y-6 mb-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Key Idea</h3>
+          <p class="text-slate-700 dark:text-slate-300">{entry.keyIdea}</p>
+        </div>
+        
+        {entry.codeSnippet && (
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Code Snippet ({entry.language})</h3>
+            <pre class="bg-slate-100 dark:bg-slate-900 p-4 rounded-lg overflow-x-auto"><code class={`language-${entry.language.toLowerCase()}`}>{entry.codeSnippet}</code></pre>
+          </div>
+        )}
+      </div>
+      
+      <div class="border-t border-slate-200 dark:border-slate-800 pt-8">
+        <div set:html={htmlContent} />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+

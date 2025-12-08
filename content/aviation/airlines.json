@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Air India",
+    "logo": "/airlines/air-india.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/Air_India",
+    "equipment": ["B777-300ER", "A321", "A320neo", "A320"]
+  },
+  {
+    "name": "Air India Express",
+    "logo": "/airlines/air-india-express.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/Air_India_Express",
+    "equipment": ["A320"]
+  },
+  {
+    "name": "Akasa Air",
+    "logo": "/airlines/akasa-air.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/Akasa_Air",
+    "equipment": ["B737-MAX8"]
+  },
+  {
+    "name": "All Nippon Airways",
+    "logo": "/airlines/ana.png",
+    "country": "Japan",
+    "website": "https://en.wikipedia.org/wiki/All_Nippon_Airways",
+    "equipment": ["B777-300ER", "B787-9"]
+  },
+  {
+    "name": "Delta",
+    "logo": "/airlines/delta.png",
+    "country": "United States",
+    "website": "https://en.wikipedia.org/wiki/Delta_Air_Lines",
+    "equipment": ["A321"]
+  },
+  {
+    "name": "GoFirst (formerly GoAir)",
+    "logo": "/airlines/gofirst.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/GoFirst",
+    "equipment": ["A320neo"]
+  },
+  {
+    "name": "IndiGo",
+    "logo": "/airlines/indigo.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/IndiGo",
+    "equipment": ["A320", "A321"]
+  },
+  {
+    "name": "Jet Airways",
+    "logo": "/airlines/jet-airways.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/Jet_Airways",
+    "equipment": ["B737-800/900NG"]
+  },
+  {
+    "name": "Lufthansa",
+    "logo": "/airlines/lufthansa.png",
+    "country": "Germany",
+    "website": "https://en.wikipedia.org/wiki/Lufthansa",
+    "equipment": ["A380", "A319", "A350-900", "B747-8i"]
+  },
+  {
+    "name": "PrivatAir",
+    "logo": "/airlines/privatair.png",
+    "country": "Switzerland",
+    "website": "https://en.wikipedia.org/wiki/PrivatAir",
+    "equipment": ["Boeing 737-700 BBJ (on behalf of Lufthansa)"]
+  },
+  {
+    "name": "Ryanair",
+    "logo": "/airlines/ryanair.png",
+    "country": "Ireland",
+    "website": "https://en.wikipedia.org/wiki/Ryanair",
+    "equipment": ["B737-800"]
+  },
+  {
+    "name": "SWISS",
+    "logo": "/airlines/swiss.png",
+    "country": "Switzerland",
+    "website": "https://en.wikipedia.org/wiki/Swiss_International_Air_Lines",
+    "equipment": ["A330-300", "B777-300ER"]
+  },
+  {
+    "name": "United",
+    "logo": "/airlines/united.png",
+    "country": "United States",
+    "website": "https://en.wikipedia.org/wiki/United_Airlines",
+    "equipment": ["B767-300"]
+  },
+  {
+    "name": "Vistara",
+    "logo": "/airlines/vistara.png",
+    "country": "India",
+    "website": "https://en.wikipedia.org/wiki/Vistara",
+    "equipment": ["A320"]
+  },
+  {
+    "name": "airBaltic",
+    "logo": "/airlines/airbaltic.png",
+    "country": "Latvia",
+    "website": "https://en.wikipedia.org/wiki/AirBaltic",
+    "equipment": ["A220-300 (on behalf of Lufthansa)"]
+  }
+]

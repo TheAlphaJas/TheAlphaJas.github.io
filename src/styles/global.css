@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  
+  body {
+    @apply font-sans;
+  }
+  
+  code {
+    @apply font-mono;
+  }
+}
+
+/* KaTeX adjustments */
+.katex {
+  font-size: 1.1em;
+}
+
+.katex-display {
+  margin: 1.5em 0;
+}
+
+/* Prism adjustments */
+pre[class*="language-"] {
+  @apply rounded-lg p-4 overflow-x-auto;
+}
+
+code[class*="language-"] {
+  @apply text-sm;
+}
+
+/* Leaflet map adjustments */
+.leaflet-container {
+  @apply rounded-lg;
+  z-index: 0;
+}
+

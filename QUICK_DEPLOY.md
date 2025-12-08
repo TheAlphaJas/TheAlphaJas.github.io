@@ -10,6 +10,7 @@
 - Make it **Public**
 - **Don't** initialize with README
 - Click "Create repository"
+.
 
 ### 2. Push Your Code
 

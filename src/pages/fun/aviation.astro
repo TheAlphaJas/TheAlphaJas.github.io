@@ -19,7 +19,7 @@ const airlines = fs.existsSync(airlinesPath)
       <span>Back to Fun Stuff</span>
     </a>
     
-    <h1 class="text-4xl font-bold mb-4">Aviation Corner</h1>
+    <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">Aviation Corner</h1>
     
     <div class="prose prose-slate dark:prose-invert max-w-none mb-12 pb-6 border-b border-slate-200 dark:border-slate-800">
       <p class="text-slate-700 dark:text-slate-300">
@@ -36,7 +36,7 @@ const airlines = fs.existsSync(airlinesPath)
       {airlines.length > 0 ? (
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {airlines.map((airline: any) => (
-            <div class="border-2 border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-300 dark:hover:border-slate-700 transition-colors bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
+            <div class="border-2 border-blue-200 dark:border-indigo-700 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 hover:border-blue-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105 overflow-hidden">
               {airline.website ? (
                 <a href={airline.website} target="_blank" rel="noopener noreferrer" class="block">
                   <div class="p-6 pb-4">

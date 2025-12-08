@@ -1,3 +1,18 @@
+#!/usr/bin/env node
+/**
+ * Streamlined CSES Solutions Sync Script
+ * 
+ * This script syncs new solutions from the cses-sols repository to the website.
+ * It only imports new solutions that don't already exist.
+ * 
+ * Usage:
+ *   node scripts/sync-cses.js [--force] [--repo-path=/path/to/cses-sols]
+ * 
+ * Options:
+ *   --force: Re-import all solutions (overwrite existing)
+ *   --repo-path: Path to cses-sols repository (default: /tmp/cses-sols)
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -5,7 +20,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const csesRepoPath = '/tmp/cses-sols';
+// Parse command line arguments
+const args = process.argv.slice(2);
+const force = args.includes('--force');
+const repoPathArg = args.find(arg => arg.startsWith('--repo-path='));
+const csesRepoPath = repoPathArg ? repoPathArg.split('=')[1] : '/tmp/cses-sols';
 const outputDir = path.join(path.dirname(__dirname), 'content', 'cses');
 
 // Ensure output directory exists
@@ -46,6 +65,12 @@ function extractTopic(filePath) {
 // Find all C++ files
 const cppFiles = [];
 function findCppFiles(dir) {
+  if (!fs.existsSync(dir)) {
+    console.error(`Repository path does not exist: ${dir}`);
+    console.error('Please clone the repository first or specify --repo-path');
+    process.exit(1);
+  }
+  
   const files = fs.readdirSync(dir);
   for (const file of files) {
     const filePath = path.join(dir, file);
@@ -60,10 +85,17 @@ function findCppFiles(dir) {
 
 findCppFiles(csesRepoPath);
 
-console.log(`Found ${cppFiles.length} CSES solution files`);
+console.log(`Found ${cppFiles.length} CSES solution files in repository`);
+
+// Get existing slugs
+const existingFiles = fs.existsSync(outputDir) ? fs.readdirSync(outputDir) : [];
+const existingSlugs = new Set(existingFiles.filter(f => f.endsWith('.md')).map(f => f.replace('.md', '')));
 
 // Process each file
 let imported = 0;
+let skipped = 0;
+let updated = 0;
+
 for (const filePath of cppFiles) {
   try {
     const code = fs.readFileSync(filePath, 'utf-8');
@@ -71,6 +103,14 @@ for (const filePath of cppFiles) {
     const slug = filenameToSlug(filename);
     const problemName = extractProblemName(filename);
     const topic = extractTopic(filePath);
+    
+    const outputPath = path.join(outputDir, `${slug}.md`);
+    const exists = existingSlugs.has(slug);
+    
+    if (exists && !force) {
+      skipped++;
+      continue;
+    }
     
     // Determine difficulty based on topic (rough estimate)
     let difficulty = 'Medium';
@@ -103,14 +143,23 @@ ${code}
 `;
 
     // Write to output file
-    const outputPath = path.join(outputDir, `${slug}.md`);
     fs.writeFileSync(outputPath, content, 'utf-8');
-    imported++;
-    console.log(`Imported: ${problemName} (${topic})`);
+    
+    if (exists) {
+      updated++;
+      console.log(`Updated: ${problemName} (${topic})`);
+    } else {
+      imported++;
+      console.log(`Imported: ${problemName} (${topic})`);
+    }
   } catch (error) {
     console.error(`Error processing ${filePath}:`, error.message);
   }
 }
 
-console.log(`\nImported ${imported} CSES solutions to ${outputDir}`);
+console.log(`\nSummary:`);
+console.log(`  Imported: ${imported} new solutions`);
+console.log(`  Updated: ${updated} existing solutions`);
+console.log(`  Skipped: ${skipped} existing solutions (use --force to re-import)`);
+console.log(`\nTotal: ${imported + updated + skipped} solutions processed`);
 

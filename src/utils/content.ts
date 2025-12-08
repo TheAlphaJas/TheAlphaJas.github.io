@@ -53,6 +53,8 @@ export interface CSESEntry {
   problemName: string;
   problemNumber?: string;
   difficulty: string;
+  topic?: string;
+  topics?: string[];
   keyIdea: string;
   codeSnippet?: string;
   language: string;
@@ -274,6 +276,8 @@ export function getCSESEntries(): CSESEntry[] {
         problemName: data.problemName || '',
         problemNumber: data.problemNumber,
         difficulty: data.difficulty || '',
+        topic: data.topic || '',
+        topics: Array.isArray(data.topics) ? data.topics : (data.topic ? [data.topic] : []),
         keyIdea: data.keyIdea || '',
         codeSnippet: data.codeSnippet,
         language: data.language || 'C++',

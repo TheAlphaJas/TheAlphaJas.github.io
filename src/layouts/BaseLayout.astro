@@ -43,11 +43,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     
     <!-- Dark mode initialization - runs immediately to prevent flash -->
+    <!-- Force light mode by default, only use dark if explicitly set in localStorage -->
     <script is:inline>
       (function() {
         try {
-          const theme = localStorage.getItem('theme') || 
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const theme = localStorage.getItem('theme') || 'light';
           if (theme === 'dark') {
             document.documentElement.classList.add('dark');
           } else {

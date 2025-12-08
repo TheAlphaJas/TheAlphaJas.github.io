@@ -2,6 +2,9 @@
 problemName: "Minimizing Coins"
 problemNumber: ""
 difficulty: "Hard"
+topic: "Dynamic Programming"
+topics:
+  - "Dynamic Programming"
 keyIdea: "Solution implementation"
 language: "C++"
 github: "https://github.com/TheAlphaJas/cses-sols"

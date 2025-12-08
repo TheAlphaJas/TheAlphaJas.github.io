@@ -2,6 +2,9 @@
 problemName: "Static Range Sum Queries"
 problemNumber: ""
 difficulty: "Medium"
+topic: "Range Queries"
+topics:
+  - "Range Queries"
 keyIdea: "Solution implementation"
 language: "C++"
 github: "https://github.com/TheAlphaJas/cses-sols"

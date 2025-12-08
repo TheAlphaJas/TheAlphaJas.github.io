@@ -2,6 +2,9 @@
 problemName: "Monsters"
 problemNumber: ""
 difficulty: "Hard"
+topic: "Graphs"
+topics:
+  - "Graphs"
 keyIdea: "Solution implementation"
 language: "C++"
 github: "https://github.com/TheAlphaJas/cses-sols"

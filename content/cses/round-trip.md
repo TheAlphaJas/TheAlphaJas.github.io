@@ -2,6 +2,9 @@
 problemName: "Round Trip"
 problemNumber: ""
 difficulty: "Hard"
+topic: "Graphs"
+topics:
+  - "Graphs"
 keyIdea: "Solution implementation"
 language: "C++"
 github: "https://github.com/TheAlphaJas/cses-sols"

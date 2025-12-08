@@ -2,6 +2,9 @@
 problemName: "Apartments"
 problemNumber: ""
 difficulty: "Easy"
+topic: "Sorting and Searching"
+topics:
+  - "Sorting and Searching"
 keyIdea: "Solution implementation"
 language: "C++"
 github: "https://github.com/TheAlphaJas/cses-sols"

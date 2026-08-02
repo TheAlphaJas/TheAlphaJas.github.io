@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getExperiences } from '../utils/content';
+
+const experiences = getExperiences();
+
+const skills = [
+  { label: 'Languages', items: ['C++', 'Python', 'MATLAB'] },
+  {
+    label: 'Frameworks & Tools',
+    items: ['PyTorch', 'TensorFlow', 'NumPy', 'OpenCV', 'Git', 'backtesting.py', 'UnTrade SDK', 'Pennylane'],
+  },
+  {
+    label: 'Areas',
+    items: [
+      'Reinforcement Learning',
+      'Causal Inference',
+      'Signal Processing',
+      'Probability & Statistics',
+      'Data Structures & Algorithms',
+    ],
+  },
+];
+
+const achievements = [
+  { year: '2025', text: 'IEEE SPS ME-UYR Grant, in collaboration with the University of Groningen, Netherlands' },
+  { year: '—', text: 'Expert on Codeforces (handle: von_Braun)' },
+  { year: '2024', text: 'Selected for the Amazon ML Summer School' },
+  { year: '2022', text: 'All India Rank 3002 out of 200k+ candidates, JEE Advanced' },
+  { year: '2022', text: '99.1 percentile out of 800k+ candidates, JEE Mains' },
+  { year: '2022', text: 'Certificate of Merit, Indian Olympiad Qualifier in Mathematics (IOQM)' },
+];
+---
+
+<BaseLayout
+  title="CV | Jasmer Singh Sanjotra"
+  description="Education, research experience, skills, and achievements of Jasmer Singh Sanjotra."
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="page-header sm:flex sm:items-end sm:justify-between sm:gap-6">
+      <div>
+        <h1 class="page-title">Curriculum Vitae</h1>
+        <p class="page-subtitle">Education, research, and everything in between.</p>
+      </div>
+      <a
+        href="/CV_new.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pill-accent mt-4 sm:mt-0 !px-4 !py-2 !text-sm flex-none w-fit"
+      >
+        Download PDF
+      </a>
+    </header>
+
+    <!-- Education -->
+    <section class="mb-14">
+      <h2 class="section-title mb-6">Education</h2>
+      <div class="border-l-2 border-accent pl-5">
+        <h3 class="font-serif text-xl text-ink">Indian Institute of Technology Indore</h3>
+        <p class="text-ink">B.Tech in Electrical Engineering</p>
+        <p class="text-sm text-muted">2022 – 2026 &middot; CGPA 9.1/10</p>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="mb-14">
+      <h2 class="section-title mb-6">Experience</h2>
+      <div class="space-y-8">
+        {
+          experiences.map((exp) => (
+            <article class="border-l-2 border-divider hover:border-accent transition-colors pl-5">
+              <div class="sm:flex sm:justify-between sm:items-baseline sm:gap-4">
+                <h3 class="font-serif text-xl text-ink">{exp.role}</h3>
+                <p class="text-sm font-mono text-muted sm:text-right sm:flex-none">{exp.duration}</p>
+              </div>
+              <p class="text-ink">
+                {exp.organization}
+                {exp.location && <span class="text-muted"> &middot; {exp.location}</span>}
+              </p>
+              <p class="text-sm text-muted">{exp.domain}</p>
+
+              {exp.achievements.length > 0 && (
+                <ul class="mt-3 space-y-1.5 list-disc pl-5 marker:text-accent">
+                  {exp.achievements.map((achievement) => (
+                    <li class="text-ink">{achievement}</li>
+                  ))}
+                </ul>
+              )}
+
+              {exp.techStack.length > 0 && (
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  {exp.techStack.map((tech) => (
+                    <span class="pill">{tech}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-14">
+      <h2 class="section-title mb-6">Technical Skills</h2>
+      <dl class="space-y-4">
+        {
+          skills.map((group) => (
+            <div class="sm:flex sm:gap-6">
+              <dt class="text-sm font-medium text-muted sm:w-44 sm:flex-none sm:pt-1">{group.label}</dt>
+              <dd class="flex flex-wrap gap-1.5 mt-1.5 sm:mt-0">
+                {group.items.map((item) => (
+                  <span class="pill">{item}</span>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <!-- Achievements -->
+    <section>
+      <h2 class="section-title mb-6">Achievements</h2>
+      <ul class="space-y-3">
+        {
+          achievements.map((item) => (
+            <li class="sm:flex sm:gap-6">
+              <span class="block text-sm font-mono text-accent sm:w-20 sm:flex-none sm:pt-0.5">{item.year}</span>
+              <span class="text-ink">{item.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

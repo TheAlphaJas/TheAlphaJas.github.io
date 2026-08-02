@@ -1,6 +1,5 @@
 ---
 title: Pass the ball
-difficulty: Hard
 topics:
   - Conditional Probability
 ---

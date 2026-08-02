@@ -1,6 +1,5 @@
 ---
 title: Square Cross
-difficulty: Medium
 topics:
   - Integration
 ---

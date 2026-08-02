@@ -1,6 +1,5 @@
 ---
 title: Multinomial Expansion
-difficulty: Medium
 topics:
   - Combinatorics
   - Counting

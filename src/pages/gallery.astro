@@ -16,22 +16,17 @@ if (fs.existsSync(galleryDir)) {
 }
 ---
 
-<BaseLayout title="Gallery | Jasmer's Corner" description="Photos and visual documentation of experiences, projects, and travels.">
+<BaseLayout title="Gallery | Jasmer Singh Sanjotra" description="Photos and visual documentation of experiences, projects, and travels.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-4xl font-bold mb-4">Gallery</h1>
-    
-    <div class="prose prose-slate dark:prose-invert max-w-none mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
-      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-        A collection of photos documenting various experiences, projects, travels, and moments. 
-        This gallery serves as a visual record of my journey through research, competitive programming, 
-        aviation, and life in general.
-      </p>
-    </div>
+    <header class="page-header">
+      <h1 class="page-title">Gallery</h1>
+      <p class="page-subtitle">Photos from research, travel, and the occasional window seat.</p>
+    </header>
     
     {galleryImages.length > 0 ? (
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {galleryImages.map((image) => (
-          <div class="relative group cursor-pointer overflow-hidden rounded-lg border-2 border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-colors">
+          <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-divider hover:border-accent transition-colors">
             <img
               src={image}
               alt="Gallery image"
@@ -42,10 +37,10 @@ if (fs.existsSync(galleryDir)) {
         ))}
       </div>
     ) : (
-      <div class="text-center py-12 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg">
-        <p class="text-slate-600 dark:text-slate-400 mb-2">No gallery images found.</p>
-        <p class="text-sm text-slate-500 dark:text-slate-500">
-          Add images to <code class="text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">public/gallery/</code> to display them here.
+      <div class="text-center py-12 border border-dashed border-divider rounded-lg">
+        <p class="text-muted mb-2">No gallery images found.</p>
+        <p class="text-sm text-muted">
+          Add images to <code class="text-xs bg-subtle px-2 py-1 rounded">public/gallery/</code> to display them here.
         </p>
       </div>
     )}

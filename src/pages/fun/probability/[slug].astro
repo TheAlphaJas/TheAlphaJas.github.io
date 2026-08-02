@@ -19,40 +19,33 @@ const solutionHtml = await renderMarkdown(problem.solution);
 <BaseLayout title={`${problem.title} | Probability Corner`} description={`Probability problem: ${problem.title}`}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="flex items-center gap-4 mb-6">
-      <a href="/fun" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 inline-flex items-center space-x-2">
+      <a href="/fun" class="text-muted hover:text-accent inline-flex items-center space-x-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
         <span>Fun Stuff</span>
       </a>
-      <span class="text-slate-400 dark:text-slate-600">/</span>
-      <a href="/fun/probability" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+      <span class="text-muted">/</span>
+      <a href="/fun/probability" class="text-muted hover:text-accent">
         Probability Corner
       </a>
     </div>
     
-    <article class="prose prose-slate dark:prose-invert max-w-none">
-      <div class="flex justify-between items-start mb-6">
-        <h1 class="text-4xl font-bold mb-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">{problem.title}</h1>
-        <span class="px-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded">
-          {problem.difficulty}
-        </span>
-      </div>
-      
-      <div class="flex flex-wrap gap-2 mb-8">
+    <article class="prose max-w-none">
+      <h1 class="font-serif text-3xl font-medium text-ink mb-4">{problem.title}</h1>
+
+      <div class="flex flex-wrap gap-1.5 mb-8">
         {problem.topics.map((topic) => (
-          <span class="px-3 py-1 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded">
-            {topic}
-          </span>
+          <span class="pill">{topic}</span>
         ))}
       </div>
       
-      <div class="border-t border-slate-200 dark:border-slate-800 pt-8 mb-8">
+      <div class="border-t border-divider pt-8 mb-8">
         <h2 class="text-2xl font-semibold mb-4">Problem</h2>
         <div set:html={problemHtml} />
       </div>
       
-      <div class="border-t border-slate-200 dark:border-slate-800 pt-8">
+      <div class="border-t border-divider pt-8">
         <h2 class="text-2xl font-semibold mb-4">Solution</h2>
         <div set:html={solutionHtml} />
       </div>

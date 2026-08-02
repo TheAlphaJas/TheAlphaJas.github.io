@@ -2,43 +2,39 @@
 ---
 
 <button
-  class="dark-mode-toggle-btn p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+  class="dark-mode-toggle-btn p-2 rounded text-ink hover:text-accent transition-colors"
   aria-label="Toggle dark mode"
   type="button"
 >
-  <svg class="sun-icon w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  <svg class="sun-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    ></path>
   </svg>
-  <svg class="moon-icon w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
   </svg>
 </button>
 
 <script>
-  (function() {
+  (function () {
     function initDarkModeToggles() {
       const toggles = document.querySelectorAll('.dark-mode-toggle-btn');
-      
-      if (toggles.length === 0) {
-        return;
-      }
-      
+      if (toggles.length === 0) return;
+
       function updateAllIcons() {
         const isDark = document.documentElement.classList.contains('dark');
-        const sunIcons = document.querySelectorAll('.sun-icon');
-        const moonIcons = document.querySelectorAll('.moon-icon');
-        
-        sunIcons.forEach(icon => {
-          icon.classList.toggle('hidden', !isDark);
-          icon.classList.toggle('block', isDark);
-        });
-        
-        moonIcons.forEach(icon => {
-          icon.classList.toggle('hidden', isDark);
-          icon.classList.toggle('block', !isDark);
-        });
+        document.querySelectorAll('.sun-icon').forEach((icon) => icon.classList.toggle('hidden', !isDark));
+        document.querySelectorAll('.moon-icon').forEach((icon) => icon.classList.toggle('hidden', isDark));
       }
-      
+
       function toggleDarkMode() {
         try {
           const isDark = document.documentElement.classList.toggle('dark');
@@ -48,34 +44,25 @@
           console.error('Error toggling dark mode:', error);
         }
       }
-      
-      // Add click handlers to all toggles
-      toggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
           toggleDarkMode();
         });
       });
-      
-      // Initial icon update
+
       updateAllIcons();
-      
-      // Watch for theme changes
+
       const observer = new MutationObserver(updateAllIcons);
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class']
-      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     }
-    
-    // Initialize when DOM is ready
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initDarkModeToggles);
     } else {
-      // DOM already ready
       initDarkModeToggles();
     }
   })();
 </script>
-

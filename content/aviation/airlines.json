@@ -11,7 +11,7 @@
     "logo": "/airlines/air-india-express.png",
     "country": "India",
     "website": "https://en.wikipedia.org/wiki/Air_India_Express",
-    "equipment": ["A320"]
+    "equipment": ["A320", "A321neo", "B737-MAX8"]
   },
   {
     "name": "Akasa Air",
@@ -46,7 +46,7 @@
     "logo": "/airlines/indigo.png",
     "country": "India",
     "website": "https://en.wikipedia.org/wiki/IndiGo",
-    "equipment": ["A320", "A321"]
+    "equipment": ["A320", "A320neo", "A321neo", "ATR72"]
   },
   {
     "name": "Jet Airways",
@@ -60,7 +60,7 @@
     "logo": "/airlines/lufthansa.png",
     "country": "Germany",
     "website": "https://en.wikipedia.org/wiki/Lufthansa",
-    "equipment": ["A380", "A319", "A350-900", "B747-8i"]
+    "equipment": ["A319", "A320neo", "A321neo", "A359", "A380", "B747-8i", "B787-9"]
   },
   {
     "name": "PrivatAir",

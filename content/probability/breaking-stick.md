@@ -1,6 +1,5 @@
 ---
 title: Breaking Stick
-difficulty: Medium
 topics:
   - Uniform Distribution
   - Integration

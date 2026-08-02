@@ -1,6 +1,5 @@
 ---
 title: Differ by 2
-difficulty: Hard
 topics:
   - Expectations
 ---

@@ -1,6 +1,5 @@
 ---
 title: Comparing Flips II
-difficulty: Hard
 topics:
   - Conditional Probability
 ---

@@ -1,6 +1,5 @@
 ---
 title: Russian Roulette II
-difficulty: Hard
 topics:
   - Series
 ---

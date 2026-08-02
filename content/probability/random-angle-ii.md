@@ -1,6 +1,5 @@
 ---
 title: Random Angle II
-difficulty: Hard
 topics:
   - Uniform Distribution
   - Triangle

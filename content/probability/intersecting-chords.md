@@ -1,6 +1,5 @@
 ---
 title: Intersecting Chords
-difficulty: Medium
 topics:
   - Combinatorics
   - Counting Principle

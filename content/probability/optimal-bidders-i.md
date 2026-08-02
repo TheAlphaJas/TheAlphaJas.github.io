@@ -1,6 +1,5 @@
 ---
 title: Optimal Bidders I
-difficulty: Hard
 topics:
   - Statistics
   - Expectations

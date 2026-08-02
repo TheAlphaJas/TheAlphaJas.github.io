@@ -64,16 +64,16 @@ function formatFlightTime(time: number | string | undefined): string {
 }
 ---
 
-<div class="p-6 border-2 border-blue-200 dark:border-indigo-700 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 hover:border-blue-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all duration-300">
+<div class="p-6 border border-divider rounded-lg bg-card hover:border-accent transition-shadow duration-200 hover:shadow-md">
   {ifConfig.username ? (
     <div class="space-y-6">
       <!-- Profile Header -->
-      <div class="pb-4 border-b border-slate-200 dark:border-slate-700">
-        <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <div class="pb-4 border-b border-divider">
+        <h3 class="text-lg font-semibold text-ink">
           {ifConfig.username}
         </h3>
         {ifConfig.grade && (
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+          <p class="text-sm text-muted mt-1">
             Grade: <span class="font-medium">{ifConfig.grade}</span>
           </p>
         )}
@@ -82,36 +82,36 @@ function formatFlightTime(time: number | string | undefined): string {
       <!-- Stats Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {ifConfig.totalFlights !== undefined && (
-          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-blue-200 dark:border-indigo-700 shadow-sm">
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Flights</p>
-            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+          <div class="p-4 bg-card rounded-lg border border-divider shadow-sm">
+            <p class="text-xs text-muted mb-1">Total Flights</p>
+            <p class="text-2xl font-bold text-ink">
               {ifConfig.totalFlights.toLocaleString()}
             </p>
           </div>
         )}
         
         {ifConfig.totalFlightTime !== undefined && (
-          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-indigo-200 dark:border-purple-700 shadow-sm">
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Flight Time</p>
-            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+          <div class="p-4 bg-card rounded-lg border border-divider shadow-sm">
+            <p class="text-xs text-muted mb-1">Flight Time</p>
+            <p class="text-2xl font-bold text-ink">
               {formatFlightTime(ifConfig.totalFlightTime)}
             </p>
           </div>
         )}
         
         {ifConfig.totalLandings !== undefined && (
-          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-purple-200 dark:border-indigo-700 shadow-sm">
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Landings</p>
-            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+          <div class="p-4 bg-card rounded-lg border border-divider shadow-sm">
+            <p class="text-xs text-muted mb-1">Total Landings</p>
+            <p class="text-2xl font-bold text-ink">
               {ifConfig.totalLandings.toLocaleString()}
             </p>
           </div>
         )}
         
         {ifConfig.xp !== undefined && (
-          <div class="p-4 bg-white dark:bg-slate-800 rounded-lg border border-blue-200 dark:border-indigo-700 shadow-sm">
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">XP</p>
-            <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+          <div class="p-4 bg-card rounded-lg border border-divider shadow-sm">
+            <p class="text-xs text-muted mb-1">XP</p>
+            <p class="text-2xl font-bold text-ink">
               {ifConfig.xp.toLocaleString()}
             </p>
           </div>
@@ -120,15 +120,15 @@ function formatFlightTime(time: number | string | undefined): string {
     </div>
   ) : (
     <div class="space-y-4">
-      <p class="text-slate-600 dark:text-slate-400">
+      <p class="text-muted">
         Configure your Infinite Flight stats to display them here.
       </p>
-      <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg">
-        <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Setup Instructions:</p>
-        <ol class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-decimal list-inside">
-          <li>Edit <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">content/aviation/infinite-flight.json</code></li>
+      <div class="p-4 bg-subtle rounded-lg">
+        <p class="text-xs font-semibold text-ink mb-2">Setup Instructions:</p>
+        <ol class="text-xs text-muted space-y-1 list-decimal list-inside">
+          <li>Edit <code class="bg-subtle px-1 py-0.5 rounded">content/aviation/infinite-flight.json</code></li>
           <li>Add your Infinite Flight username</li>
-          <li>Add your stats: <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalFlights</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalFlightTime</code> (as number in hours or string like "1313h03m"), <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">totalLandings</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">xp</code>, <code class="bg-slate-200 dark:bg-slate-700 px-1 py-0.5 rounded">grade</code></li>
+          <li>Add your stats: <code class="bg-subtle px-1 py-0.5 rounded">totalFlights</code>, <code class="bg-subtle px-1 py-0.5 rounded">totalFlightTime</code> (as number in hours or string like "1313h03m"), <code class="bg-subtle px-1 py-0.5 rounded">totalLandings</code>, <code class="bg-subtle px-1 py-0.5 rounded">xp</code>, <code class="bg-subtle px-1 py-0.5 rounded">grade</code></li>
         </ol>
       </div>
     </div>

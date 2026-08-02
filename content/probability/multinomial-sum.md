@@ -1,6 +1,5 @@
 ---
 title: Multinomial Sum
-difficulty: Medium
 topics:
   - Combinatorics
   - Counting

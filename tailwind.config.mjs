@@ -5,126 +5,74 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Roboto', 'system-ui', 'sans-serif'],
+        serif: ['"Roboto Slab"', 'Georgia', 'serif'],
+        mono: ['"Roboto Mono"', 'ui-monospace', 'monospace'],
+      },
+      // Every colour resolves to a CSS variable, so dark mode is a single
+      // variable swap on <html class="dark"> instead of dark: on every element.
+      colors: {
+        page: 'var(--global-bg-color)',
+        card: 'var(--global-card-bg-color)',
+        ink: 'var(--global-text-color)',
+        muted: 'var(--global-text-color-light)',
+        accent: 'var(--global-theme-color)',
+        divider: 'var(--global-divider-color)',
+        subtle: 'var(--global-subtle-bg-color)',
+      },
+      borderColor: {
+        DEFAULT: 'var(--global-divider-color)',
+      },
+      maxWidth: {
+        content: '52rem',
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: 'none',
-            color: 'rgb(51 65 85)',
-            '[class~="lead"]': {
-              color: 'rgb(71 85 105)',
-            },
+            color: 'var(--global-text-color)',
             a: {
-              color: 'rgb(59 130 246)',
+              color: 'var(--global-theme-color)',
               textDecoration: 'none',
-              '&:hover': {
-                color: 'rgb(37 99 235)',
-              },
+              fontWeight: '400',
+              '&:hover': { textDecoration: 'underline' },
+            },
+            'h1, h2, h3, h4, h5, h6': {
+              color: 'var(--global-text-color)',
+              fontFamily: '"Roboto Slab", Georgia, serif',
+              fontWeight: '500',
             },
             strong: {
-              color: 'rgb(30 41 59)',
-              fontWeight: '600',
+              color: 'var(--global-text-color)',
+              fontWeight: '700',
             },
-            'ol > li::before': {
-              color: 'rgb(148 163 184)',
-            },
-            'ul > li::before': {
-              backgroundColor: 'rgb(203 213 225)',
-            },
-            hr: {
-              borderColor: 'rgb(226 232 240)',
-            },
+            hr: { borderColor: 'var(--global-divider-color)' },
             blockquote: {
-              color: 'rgb(71 85 105)',
-              borderLeftColor: 'rgb(226 232 240)',
-            },
-            h1: {
-              color: 'rgb(30 41 59)',
-            },
-            h2: {
-              color: 'rgb(30 41 59)',
-            },
-            h3: {
-              color: 'rgb(30 41 59)',
-            },
-            h4: {
-              color: 'rgb(30 41 59)',
+              color: 'var(--global-text-color-light)',
+              borderLeftColor: 'var(--global-theme-color)',
+              fontStyle: 'normal',
             },
             code: {
-              color: 'rgb(30 41 59)',
+              color: 'var(--global-text-color)',
+              backgroundColor: 'var(--global-code-bg-color)',
+              borderRadius: '3px',
+              padding: '0.15em 0.35em',
+              fontWeight: '400',
             },
-            'a code': {
-              color: 'rgb(30 41 59)',
-            },
+            'code::before': { content: '""' },
+            'code::after': { content: '""' },
             pre: {
-              color: 'rgb(30 41 59)',
-              backgroundColor: 'rgb(241 245 249)',
+              color: 'var(--global-text-color)',
+              backgroundColor: 'var(--global-code-bg-color)',
+              border: '1px solid var(--global-divider-color)',
             },
+            'ol > li::marker': { color: 'var(--global-text-color-light)' },
+            'ul > li::marker': { color: 'var(--global-text-color-light)' },
             thead: {
-              color: 'rgb(30 41 59)',
-              borderBottomColor: 'rgb(226 232 240)',
+              color: 'var(--global-text-color)',
+              borderBottomColor: 'var(--global-divider-color)',
             },
-            'tbody tr': {
-              borderBottomColor: 'rgb(226 232 240)',
-            },
-          },
-        },
-        invert: {
-          css: {
-            color: 'rgb(203 213 225)',
-            '[class~="lead"]': {
-              color: 'rgb(148 163 184)',
-            },
-            a: {
-              color: 'rgb(96 165 250)',
-            },
-            strong: {
-              color: 'rgb(226 232 240)',
-            },
-            'ol > li::before': {
-              color: 'rgb(148 163 184)',
-            },
-            'ul > li::before': {
-              backgroundColor: 'rgb(71 85 105)',
-            },
-            hr: {
-              borderColor: 'rgb(51 65 85)',
-            },
-            blockquote: {
-              color: 'rgb(148 163 184)',
-              borderLeftColor: 'rgb(51 65 85)',
-            },
-            h1: {
-              color: 'rgb(226 232 240)',
-            },
-            h2: {
-              color: 'rgb(226 232 240)',
-            },
-            h3: {
-              color: 'rgb(226 232 240)',
-            },
-            h4: {
-              color: 'rgb(226 232 240)',
-            },
-            code: {
-              color: 'rgb(226 232 240)',
-            },
-            'a code': {
-              color: 'rgb(226 232 240)',
-            },
-            pre: {
-              color: 'rgb(226 232 240)',
-              backgroundColor: 'rgb(15 23 42)',
-            },
-            thead: {
-              color: 'rgb(226 232 240)',
-              borderBottomColor: 'rgb(51 65 85)',
-            },
-            'tbody tr': {
-              borderBottomColor: 'rgb(51 65 85)',
-            },
+            'tbody tr': { borderBottomColor: 'var(--global-divider-color)' },
           },
         },
       },
@@ -132,4 +80,3 @@ export default {
   },
   plugins: [require('@tailwindcss/typography')],
 };
-

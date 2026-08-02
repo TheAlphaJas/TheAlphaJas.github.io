@@ -1,75 +1,49 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const corners = [
+  {
+    href: '/fun/probability',
+    title: 'Probability Corner',
+    description: 'Puzzles that break intuition, with worked solutions.',
+  },
+  {
+    href: '/fun/cses',
+    title: 'CSES Problem Set',
+    description: 'C++ solutions and the key idea behind each one.',
+  },
+  {
+    href: '/fun/usaco',
+    title: 'USACO',
+    description: 'Contest problems, algorithms, and data structures.',
+  },
+  {
+    href: '/fun/aviation',
+    title: 'Aviation Corner',
+    description: 'Airlines flown, aircraft types, and Infinite Flight stats.',
+  },
+];
 ---
 
-<BaseLayout title="Fun Stuff | Jasmer's Corner" description="Technical corners: probability, competitive programming, and aviation.">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">Fun Stuff</h1>
-    
-    <div class="prose prose-slate dark:prose-invert max-w-none mb-12 pb-8 border-b border-slate-200 dark:border-slate-800">
-      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-        This section contains various interests and hobbies that intrigue me beyond my core research work. 
-        Here you'll find probability puzzles I solve for fun, competitive programming solutions, and my 
-        passion for aviation. These corners represent the diverse technical curiosities that keep me 
-        engaged and learning.
-      </p>
-      <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mt-4">
-        As an aviation enthusiast, I track airlines flown, aircraft types experienced, and maintain 
-        my Infinite Flight stats. The probability corner features mathematical puzzles that challenge 
-        intuition and require careful reasoning. The competitive programming sections document solutions 
-        to problems from USACO and CSES, capturing key algorithmic insights along the way.
-      </p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <a
-        href="/fun/probability"
-        class="p-6 border-2 border-blue-200 dark:border-indigo-700 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 hover:border-blue-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-      >
-        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
-          Probability Corner
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400">
-          Mathematical probability problems with detailed solutions. Markov chains, information theory, stochastic processes.
-        </p>
-      </a>
-      
-      <a
-        href="/fun/usaco"
-        class="p-6 border-2 border-indigo-200 dark:border-purple-700 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 hover:border-indigo-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-      >
-        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
-          USACO / Competitive Programming
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400">
-          Competitive programming solutions and key insights. USACO problems, algorithms, and data structures.
-        </p>
-      </a>
-      
-      <a
-        href="/fun/cses"
-        class="p-6 border-2 border-purple-200 dark:border-indigo-700 rounded-lg bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 hover:border-purple-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-      >
-        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
-          CSES Problem Set
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400">
-          Solutions to problems from the CSES Problem Set. Algorithms, data structures, and competitive programming.
-        </p>
-      </a>
-      
-      <a
-        href="/fun/aviation"
-        class="p-6 border-2 border-indigo-200 dark:border-blue-700 rounded-lg bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-slate-800 dark:to-slate-900 hover:border-indigo-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-      >
-        <h2 class="text-2xl font-semibold mb-3 text-slate-900 dark:text-slate-100">
-          Aviation Corner
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400">
-          Airlines flown, aircraft types, and Infinite Flight stats.
-        </p>
-      </a>
+<BaseLayout
+  title="Fun | Jasmer Singh Sanjotra"
+  description="Probability puzzles, competitive programming solutions, and aviation."
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="page-header">
+      <h1 class="page-title">Fun</h1>
+      <p class="page-subtitle">Things I keep around because I enjoy them, not because they are useful.</p>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {
+        corners.map((corner) => (
+          <a href={corner.href} class="card block p-5">
+            <h2 class="font-serif text-lg text-ink mb-1.5">{corner.title}</h2>
+            <p class="text-sm text-muted">{corner.description}</p>
+          </a>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
-

@@ -1,6 +1,5 @@
 ---
 title: Confused Ant II
-difficulty: Hard
 topics:
   - Expectations
 ---

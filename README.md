@@ -16,11 +16,11 @@ A production-ready, minimal, multi-page personal website for a research engineer
 
 ## Site Structure
 
-- `/` - Home page
-- `/about` - About page
+- `/` - Home / about page
+- `/publications` - Publication list, grouped by year
 - `/projects` - Projects listing with tag filtering
 - `/projects/[slug]` - Individual project pages
-- `/experience` - Experience timeline
+- `/cv` - Education, experience timeline, skills, achievements
 - `/fun` - Fun stuff index
 - `/fun/probability` - Probability problems with solutions
 - `/fun/probability/[slug]` - Individual problem pages
@@ -242,11 +242,13 @@ The repository includes a GitHub Actions workflow that automatically deploys on 
 
 Update the following files with your information:
 
-- `src/pages/index.astro` - Home page content
-- `src/pages/about.astro` - About page content
+- `src/pages/index.astro` - Home page bio and news items
+- `src/pages/cv.astro` - Education, skills, achievements (experience comes from `content/experience/`)
 - `src/pages/contact.astro` - Contact links
+- `src/components/SocialLinks.astro` - Social icon row (home + contact)
 - `src/components/Footer.astro` - GitHub repository link
-- `src/components/Navbar.astro` - Site title
+- `src/components/Navbar.astro` - Site title and navigation
+- `src/styles/global.css` - Theme colours (light and dark) in one place
 
 ### SEO
 

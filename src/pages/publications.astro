@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublications } from '../utils/content';
+
+const publications = getPublications();
+const years = Array.from(new Set(publications.map((p) => p.year))).sort((a, b) => b - a);
+const hasPending = publications.some((p) => p.titlePending);
+---
+
+<BaseLayout
+  title="Publications | Jasmer Singh Sanjotra"
+  description="Peer-reviewed publications in speech processing, medical imaging, and machine learning."
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="page-header">
+      <h1 class="page-title">Publications</h1>
+      <p class="page-subtitle">
+        Also on <a
+          href="https://scholar.google.com/citations?hl=en&user=NUCuUbIAAAAJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link">Google Scholar</a
+        >.
+      </p>
+    </header>
+
+    <div class="space-y-12">
+      {
+        years.map((year) => (
+          <section>
+            <h2 class="font-serif text-3xl text-muted mb-6">{year}</h2>
+            <ol class="space-y-8">
+              {publications
+                .filter((p) => p.year === year)
+                .map((pub) => (
+                  <li class="sm:flex sm:gap-6">
+                    <div class="hidden sm:block sm:w-1 sm:flex-none bg-accent rounded-full opacity-70" />
+                    <div class="space-y-1.5 border-l-2 border-accent pl-4 sm:border-none sm:pl-0">
+                      <h3 class="font-serif text-lg leading-snug text-ink">
+                        {pub.url ? (
+                          <a href={pub.url} target="_blank" rel="noopener noreferrer" class="link">
+                            {pub.title}
+                          </a>
+                        ) : (
+                          pub.title
+                        )}
+                        {pub.titlePending && <span class="text-muted">*</span>}
+                      </h3>
+                      <p class="text-sm text-muted">
+                        {pub.authors.map((author, i) => (
+                          <>
+                            {author.includes('Jasmer') ? (
+                              <span class="text-ink font-medium">{author}</span>
+                            ) : (
+                              author
+                            )}
+                            {i < pub.authors.length - 1 ? ', ' : ''}
+                          </>
+                        ))}
+                      </p>
+                      <p class="text-sm italic text-muted">{pub.venue}</p>
+                      {pub.note && <p class="text-xs text-muted">{pub.note}</p>}
+                      <div class="flex flex-wrap gap-2 pt-1.5">
+                        {pub.status !== 'published' && <span class="pill capitalize">{pub.status}</span>}
+                        {pub.doi && (
+                          <a
+                            href={`https://doi.org/${pub.doi}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="pill-accent"
+                          >
+                            DOI
+                          </a>
+                        )}
+                        {pub.url && (
+                          <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pill-accent">
+                            Paper
+                          </a>
+                        )}
+                        {pub.code && (
+                          <a href={pub.code} target="_blank" rel="noopener noreferrer" class="pill-accent">
+                            Code
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+            </ol>
+          </section>
+        ))
+      }
+    </div>
+
+    {
+      hasPending && (
+        <p class="mt-12 pt-6 border-t border-divider text-sm text-muted">
+          * Working title — will be updated once the camera-ready version is out.
+        </p>
+      )
+    }
+  </div>
+</BaseLayout>

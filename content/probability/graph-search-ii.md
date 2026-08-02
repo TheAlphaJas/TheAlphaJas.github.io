@@ -1,6 +1,5 @@
 ---
 title: Graph Search II
-difficulty: Hard
 topics:
   - Expectations
 ---

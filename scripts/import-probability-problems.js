@@ -15,28 +15,6 @@ if (!fs.existsSync(newContentDir)) {
   fs.mkdirSync(newContentDir, { recursive: true });
 }
 
-// Difficulty mapping based on tags and complexity
-const inferDifficulty = (tags, title) => {
-  const tagStr = tags.join(' ').toLowerCase();
-  const titleStr = title.toLowerCase();
-  
-  // Hard problems typically have: Markov, Chain, Expectation, Conditional, etc.
-  if (tagStr.includes('markov') || tagStr.includes('chain') || 
-      tagStr.includes('expectation') || tagStr.includes('conditional') ||
-      titleStr.includes('ii') || titleStr.includes('2')) {
-    return 'Hard';
-  }
-  
-  // Medium problems
-  if (tagStr.includes('integration') || tagStr.includes('distribution') ||
-      tagStr.includes('uniform')) {
-    return 'Medium';
-  }
-  
-  // Default to Medium for most
-  return 'Medium';
-};
-
 // Extract original problem link from content
 const extractOriginalLink = (content) => {
   // Try multiple patterns to catch different formats
@@ -119,9 +97,6 @@ const convertProblem = (oldFilePath) => {
     ? tags.filter(tag => tag.toLowerCase() !== 'probability')
     : tags.length > 0 ? tags : ['Probability'];
   
-  // Infer difficulty
-  const difficulty = inferDifficulty(tags, data.title || '');
-  
   // Create slug from title
   const slug = (data.title || 'untitled')
     .toLowerCase()
@@ -131,7 +106,6 @@ const convertProblem = (oldFilePath) => {
   // Create new frontmatter
   const newFrontmatter = {
     title: data.title || 'Untitled Problem',
-    difficulty: difficulty,
     topics: topics,
   };
   

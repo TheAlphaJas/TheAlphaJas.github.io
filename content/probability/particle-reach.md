@@ -1,6 +1,5 @@
 ---
 title: Particle Reach
-difficulty: Medium
 topics:
   - Random Walks
 ---

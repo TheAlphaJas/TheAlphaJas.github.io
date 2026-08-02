@@ -1,6 +1,5 @@
 ---
 title: Mean babysitter
-difficulty: Medium
 topics:
   - Combinatorics
   - Counting

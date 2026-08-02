@@ -2,156 +2,148 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens, in the spirit of al-folio: white page, near-black text,
+   a single accent colour, hairline dividers. */
+:root {
+  --global-bg-color: #ffffff;
+  --global-card-bg-color: #ffffff;
+  --global-subtle-bg-color: #f7f7f7;
+  --global-code-bg-color: #f6f6f6;
+  --global-text-color: #1c1c1d;
+  --global-text-color-light: #6f6f6f;
+  --global-theme-color: #b509ac;
+  --global-divider-color: rgba(0, 0, 0, 0.12);
+}
+
+html.dark {
+  --global-bg-color: #1c1c1d;
+  --global-card-bg-color: #212529;
+  --global-subtle-bg-color: #242628;
+  --global-code-bg-color: #2b2d30;
+  --global-text-color: #e8e8e8;
+  --global-text-color-light: #a3a3a3;
+  --global-theme-color: #e05cd8;
+  --global-divider-color: rgba(255, 255, 255, 0.14);
+}
+
 @layer base {
   html {
     @apply antialiased;
   }
-  
+
   body {
     @apply font-sans;
+    font-size: 1rem;
+    line-height: 1.65;
   }
-  
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+    font-weight: 500;
+  }
+
   code {
     @apply font-mono;
   }
-}
 
-@layer utilities {
-  /* Typing animation */
-  @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
+  a {
+    color: inherit;
   }
-  
-  @keyframes blink {
-    from, to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: currentColor;
-    }
-  }
-  
-  .typing-animation {
-    overflow: hidden;
-    border-right: 2px solid;
-    white-space: nowrap;
-    animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
-  }
-  
-  /* Gradient animations */
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-  
-  .gradient-animated {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-  }
-  
-  /* Hover glow effect */
-  @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4);
-    }
-  }
-  
-  .hover-glow:hover {
-    animation: glow 2s ease-in-out infinite;
-  }
-  
-  /* Fade in animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .fade-in {
-    animation: fadeIn 0.6s ease-out;
-  }
-  
-  /* Pulse animation */
-  @keyframes pulse-slow {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.7;
-    }
-  }
-  
-  .pulse-slow {
-    animation: pulse-slow 3s ease-in-out infinite;
-  }
-  
-  /* Floating animation */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  /* Gradient border animation */
-  @keyframes border-glow {
-    0%, 100% {
-      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.5), 0 0 30px rgba(168, 85, 247, 0.3);
-    }
-  }
-  
-  .border-glow {
-    animation: border-glow 3s ease-in-out infinite;
+
+  ::selection {
+    background: var(--global-theme-color);
+    color: #fff;
   }
 }
 
-/* KaTeX adjustments */
+@layer components {
+  /* Page heading used across every section page. */
+  .page-title {
+    @apply font-serif text-4xl sm:text-5xl font-medium tracking-tight text-ink;
+  }
+
+  .page-subtitle {
+    @apply mt-3 text-base text-muted;
+  }
+
+  /* Thin rule under a page heading, al-folio style. */
+  .page-header {
+    @apply pb-6 mb-10 border-b border-divider;
+  }
+
+  .section-title {
+    @apply font-serif text-2xl font-medium text-ink;
+  }
+
+  /* Text link that grows an accent underline on hover. */
+  .link {
+    @apply text-accent no-underline transition-colors;
+  }
+  .link:hover {
+    @apply underline;
+  }
+
+  .card {
+    @apply bg-card border border-divider rounded-md transition-shadow duration-200;
+  }
+  .card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+  }
+
+  /* Small outlined pill, used for tags and paper links. */
+  .pill {
+    @apply inline-block px-2 py-0.5 text-xs font-mono rounded border border-divider text-muted;
+  }
+
+  /* Airline logos are drawn for light backgrounds, so they sit on a white
+     plate that stays white in dark mode. */
+  .logo-plate {
+    @apply flex items-center justify-center rounded-md p-3;
+    background-color: #ffffff;
+  }
+
+  html.dark .logo-plate {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .pill-accent {
+    @apply inline-block px-2 py-0.5 text-xs rounded border text-accent transition-colors;
+    border-color: var(--global-theme-color);
+  }
+  .pill-accent:hover {
+    background-color: var(--global-theme-color);
+    color: #fff;
+  }
+}
+
+/* KaTeX */
 .katex {
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 .katex-display {
   margin: 1.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
-/* Prism adjustments */
-pre[class*="language-"] {
-  @apply rounded-lg p-4 overflow-x-auto;
+/* Code blocks */
+pre[class*='language-'] {
+  @apply rounded-md p-4 overflow-x-auto border border-divider;
+  background-color: var(--global-code-bg-color);
 }
 
-code[class*="language-"] {
+code[class*='language-'] {
   @apply text-sm;
 }
 
-/* Leaflet map adjustments */
+/* Leaflet map */
 .leaflet-container {
-  @apply rounded-lg;
+  @apply rounded-md;
   z-index: 0;
 }
-

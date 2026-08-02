@@ -1,6 +1,6 @@
 ---
-title: "Reinforcement Learning for Hangman Game"
-objective: "Designed a Deep Q-Network (DQN)-based agent to play Hangman by predicting optimal letter choices, using RNNs for memory."
+title: "Memory-Augmented RL for Stochastic Word-Games"
+objective: "A DQN agent with an LSTM/GRU memory that plays Hangman under partial observability, reaching an 85%+ win rate over a 50k-word vocabulary."
 techStack:
   - Python
   - PyTorch

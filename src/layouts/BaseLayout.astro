@@ -8,7 +8,10 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Jasmer\'s Corner - Research engineer and competitive programmer' } = Astro.props;
+const {
+  title,
+  description = 'Jasmer Singh Sanjotra — research on causal reinforcement learning, world models, and machine learning for speech and signals.',
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -20,51 +23,49 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-    
+
     <title>{title}</title>
-    
-    <!-- Dark mode initialization - runs immediately to prevent flash -->
-    <!-- Force light mode by default, only use dark if explicitly set in localStorage -->
+
+    <!-- Applied before first paint so the theme never flashes. -->
     <script is:inline>
-      (function() {
+      (function () {
         try {
-          const theme = localStorage.getItem('theme') || 'light';
-          if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', stored ? stored === 'dark' : prefersDark);
         } catch (e) {
-          console.error('Dark mode initialization error:', e);
+          /* fall back to light */
         }
       })();
     </script>
   </head>
-  <body class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-200">
+  <body class="bg-page text-ink">
     <Navbar />
-    <main class="min-h-screen">
+    <main class="min-h-[70vh]">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-

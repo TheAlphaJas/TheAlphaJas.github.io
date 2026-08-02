@@ -1,6 +1,5 @@
 ---
 title: Random Ratio
-difficulty: Medium
 topics:
   - Integration
 ---

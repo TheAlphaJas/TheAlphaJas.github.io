@@ -1,6 +1,5 @@
 ---
 title: Chess Tournament I
-difficulty: Medium
 topics:
   - Combinatorics
   - Counting Principle

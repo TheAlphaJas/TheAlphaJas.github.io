@@ -1,6 +1,5 @@
 ---
 title: Modified RNG
-difficulty: Hard
 topics:
   - Expectations
   - Conditional Expectation

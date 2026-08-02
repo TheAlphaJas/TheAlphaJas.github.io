@@ -20,17 +20,33 @@ export interface Experience {
   slug: string;
   organization: string;
   role: string;
+  location?: string;
   duration: string;
   domain: string;
   achievements: string[];
   techStack: string[];
   content: string;
+  order: number;
+}
+
+export interface Publication {
+  slug: string;
+  title: string;
+  titlePending: boolean;
+  authors: string[];
+  venue: string;
+  year: number;
+  date?: string;
+  doi?: string;
+  url?: string;
+  code?: string;
+  status: string;
+  note?: string;
 }
 
 export interface ProbabilityProblem {
   slug: string;
   title: string;
-  difficulty: string;
   topics: string[];
   problem: string;
   solution: string;
@@ -116,22 +132,47 @@ export function getExperiences(): Experience[] {
         slug: file.replace('.md', ''),
         organization: data.organization || '',
         role: data.role || '',
+        location: data.location,
         duration: data.duration || '',
         domain: data.domain || '',
         achievements: Array.isArray(data.achievements) ? data.achievements : [],
         techStack: Array.isArray(data.techStack) ? data.techStack : [],
         content,
+        order: typeof data.order === 'number' ? data.order : 999,
       };
     })
-    .sort((a, b) => {
-      // Sort by duration end date if available
-      const aEnd = a.duration.split('–')[1]?.trim() || '';
-      const bEnd = b.duration.split('–')[1]?.trim() || '';
-      if (aEnd && bEnd) {
-        return new Date(bEnd).getTime() - new Date(aEnd).getTime();
-      }
-      return 0;
-    });
+    // `order` is explicit in frontmatter: overlapping and open-ended roles
+    // ("May 2024 – Present") can't be ordered reliably from the dates alone.
+    .sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
+}
+
+export function getPublications(): Publication[] {
+  const pubDir = path.join(process.cwd(), 'content', 'publications');
+  if (!fs.existsSync(pubDir)) return [];
+
+  const files = fs.readdirSync(pubDir);
+  return files
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const filePath = path.join(pubDir, file);
+      const { data } = matter(fs.readFileSync(filePath, 'utf-8'));
+
+      return {
+        slug: file.replace('.md', ''),
+        title: data.title || '',
+        titlePending: data.titlePending === true,
+        authors: Array.isArray(data.authors) ? data.authors : [],
+        venue: data.venue || '',
+        year: Number(data.year) || 0,
+        date: data.date,
+        doi: data.doi,
+        url: data.url,
+        code: data.code,
+        status: data.status || 'published',
+        note: data.note,
+      };
+    })
+    .sort((a, b) => b.year - a.year || (b.date || '').localeCompare(a.date || ''));
 }
 
 export function getProbabilityProblems(): ProbabilityProblem[] {
@@ -201,7 +242,6 @@ export function getProbabilityProblems(): ProbabilityProblem[] {
       return {
         slug: file.replace('.md', ''),
         title: data.title || '',
-        difficulty: data.difficulty || '',
         topics: Array.isArray(data.topics) ? data.topics : [],
         problem: problemSection.trim(),
         solution: solutionSection.trim(),

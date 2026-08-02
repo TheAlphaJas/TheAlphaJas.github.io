@@ -1,6 +1,5 @@
 ---
 title: Russian Roulette I
-difficulty: Medium
 topics:
   - Probability
 ---

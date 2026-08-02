@@ -1,6 +1,5 @@
 ---
 title: Exact 5 II
-difficulty: Hard
 topics:
   - Statistics
   - Expectations

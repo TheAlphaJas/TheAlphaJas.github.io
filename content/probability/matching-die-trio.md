@@ -1,6 +1,5 @@
 ---
 title: Matching Die Trio
-difficulty: Medium
 topics:
   - Combinatorics
 ---

@@ -2,6 +2,7 @@
 title: Comparing Flips II
 topics:
   - Conditional Probability
+  - Markov Chains
 ---
 
 You and your friend are playing a game with a fair coin, tossing it and writing down the outcomes. You win if HTH appears before HHT, else your friend wins. What is the probability that your friend wins?
@@ -91,4 +92,4 @@ $$
 1 - \frac{1}{3} = \frac{2}{3}.
 $$
 
-### Thus the probability my friend wins is $$\mathbf{\frac{2}{3}}$$
+### Thus, the probability my friend wins is $$\frac{2}{3}$$

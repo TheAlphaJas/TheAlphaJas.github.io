@@ -1,7 +1,8 @@
 ---
 title: Differ by 2
 topics:
-  - Expectations
+  - Expectation
+  - Markov Chains
 ---
 
 How many times do we have to roll a fair 6-sided die till we roll two numbers in a row that differ by 2?
@@ -128,4 +129,4 @@ E[X] = \frac{17}{3}
 $$
 
 
-### Therefore, the expected number of moves required for the ant to reach back to its starting point is $$\frac{17}{3}$$
+### Thus, the expected number of rolls until two consecutive rolls differ by 2 is $$\frac{17}{3}$$

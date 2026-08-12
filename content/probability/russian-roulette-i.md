@@ -1,7 +1,7 @@
 ---
 title: Russian Roulette I
 topics:
-  - Probability
+  - Conditional Probability
 ---
 
 You're playing a game of Russian Roulette with a friend. The six-chambered revolver is loaded with one bullet. Initially, the cylinder is spun to randomize the order of the chambers. The two of you take turns pulling the trigger until the person who fires the gun loses. Given that the cylinder is not re-spun after each turn, what is the probability that you win if your friend goes first?

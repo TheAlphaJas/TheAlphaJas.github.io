@@ -1,8 +1,9 @@
 ---
 title: Optimal Bidders I
 topics:
-  - Statistics
-  - Expectations
+  - Expectation
+  - Order Statistics
+  - Optimization
 ---
 
 Carter has come into contact with a bounty of gold. He takes it to an auction shop. The shop tells him that every bidder will place a bid uniformly between $500 and $1000. They also say they can recruit bidders for $5 per person.
@@ -95,4 +96,4 @@ $$
 = 905
 $$
 
-### Thus, the maximum expected payout Carter can get is $905.
+### Thus, the maximum expected payout Carter can get is $$\$905$$

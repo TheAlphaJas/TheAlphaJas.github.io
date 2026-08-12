@@ -1,7 +1,9 @@
 ---
 title: Confused Ant II
 topics:
-  - Expectations
+  - Expectation
+  - Markov Chains
+  - Random Walks
 ---
 
 An ant walks the corner of a 3D cube and moves to one of the three adjacent vertices with equal probability at each step. Find the expected number of steps needed for the ant to return to the vertex it started at.
@@ -171,4 +173,4 @@ $$
 E[A] = 1 + E[B] = 1 + 7 = 8
 $$
 
-### Therefore, the the expected number of moves required for the ant to reach back to its starting point is 8.
+### Thus, the expected number of moves required for the ant to return to its starting point is $$8$$

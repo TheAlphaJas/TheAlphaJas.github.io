@@ -2,8 +2,8 @@
 title: Random Angle II
 topics:
   - Uniform Distribution
-  - Triangle
   - Integration
+  - Geometric Probability
 ---
 
 A right triangle is being formed with legs labeled  $$A$$  and  $$B$$. The random lengths of legs  
@@ -20,6 +20,9 @@ $$  P(\theta > \pi/3)$$
 **Original Problem Link:** [https://www.quantguide.io/questions/random-angle-ii](https://www.quantguide.io/questions/random-angle-ii)
 
 <!-- SOLUTION_SEPARATOR -->
+
+> **A small note:** this is the first question I ever added here, hence the distinct style of writing and  
+> literature — it assumes almost zero prior knowledge :)
 
 Now we must find $$ P(\theta > \pi/3)$$.  
 
@@ -133,16 +136,6 @@ $$  = \frac{1}{\sqrt{3}} - \frac{\sqrt{3}}{6}$$
 
 $$  = \frac{2}{2\sqrt{3}} - \frac{1}{2\sqrt{3}}$$  
 
-$$  = \frac{1}{2\sqrt{3}}$$  
+$$  = \frac{1}{2\sqrt{3}}$$
 
-Thus,  
-
-$$  \boxed{P(\theta > \pi/3) = \frac{1}{2\sqrt{3}}}$$  
-
----
-
-###  Conclusion   
-Using a combination of  probability concepts, the law of total probability, and calculus ,  
-we found that the probability of  $$θ$$ exceeding $$\frac{\pi}{3}$$  is  $$\frac{1}{2√3}$$ .  
-
-This problem highlights how fundamental probability techniques can be used to analyze  geometric randomness .
+### Thus, the probability that $$\theta$$ exceeds $$\frac{\pi}{3}$$ is $$\frac{1}{2\sqrt{3}}$$

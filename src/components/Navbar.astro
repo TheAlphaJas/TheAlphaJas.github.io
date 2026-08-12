@@ -1,39 +1,103 @@
 ---
 import DarkModeToggle from './DarkModeToggle.astro';
 
-const navItems = [
+interface NavChild {
+  href: string;
+  label: string;
+}
+
+interface NavItem {
+  label: string;
+  href?: string;
+  children?: NavChild[];
+}
+
+const navItems: NavItem[] = [
   { href: '/', label: 'about' },
   { href: '/publications', label: 'publications' },
-  { href: '/projects', label: 'projects' },
+  { href: '/fun/probability', label: 'probability' },
   { href: '/cv', label: 'cv' },
-  { href: '/fun', label: 'fun' },
+  {
+    label: 'fun',
+    children: [
+      { href: '/fun/cses', label: 'cses' },
+      { href: '/fun/usaco', label: 'usaco' },
+      { href: '/fun/aviation', label: 'aviation' },
+    ],
+  },
   { href: '/contact', label: 'contact' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href + '/');
+
+// A parent is active when any of its children are, so "fun" stays highlighted
+// while you are anywhere under /fun.
+const isGroupActive = (item: NavItem) => (item.children ?? []).some((child) => isActive(child.href));
 ---
 
 <nav class="sticky top-0 z-50 bg-page/90 backdrop-blur border-b border-divider">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <a href="/" class="font-serif text-lg sm:text-xl text-ink hover:text-accent transition-colors">
-        <span class="font-bold">jasmer</span> singh sanjotra
+        <span class="font-bold">jasmer</span>
       </a>
 
       <div class="hidden md:flex items-center space-x-6">
         {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class={`text-sm tracking-wide transition-colors ${
-                isActive(item.href) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))
+          navItems.map((item) =>
+            item.children ? (
+              <div class="relative" data-dropdown>
+                <button
+                  type="button"
+                  data-dropdown-trigger
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  class={`inline-flex items-center gap-1 text-sm tracking-wide transition-colors ${
+                    isGroupActive(item) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
+                  }`}
+                >
+                  {item.label}
+                  <svg
+                    class="w-3 h-3 transition-transform"
+                    data-dropdown-chevron
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+
+                <!-- pt-2 bridges the gap so moving the cursor down does not close the menu -->
+                <div class="absolute left-0 top-full pt-2 hidden" data-dropdown-panel>
+                  <div class="min-w-[12rem] rounded-md border border-divider bg-page shadow-lg py-1">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class={`block px-4 py-2 text-sm tracking-wide transition-colors hover:bg-subtle ${
+                          isActive(child.href) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
+                        }`}
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                href={item.href}
+                class={`text-sm tracking-wide transition-colors ${
+                  isActive(item.href!) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
+                }`}
+              >
+                {item.label}
+              </a>
+            )
+          )
         }
         <DarkModeToggle />
       </div>
@@ -54,19 +118,43 @@ const isActive = (href: string) =>
       </div>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile menu: no hover on touch, so groups are simply nested and always shown -->
     <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-divider">
       {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class={`block py-2 text-sm tracking-wide transition-colors ${
-              isActive(item.href) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
-            }`}
-          >
-            {item.label}
-          </a>
-        ))
+        navItems.map((item) =>
+          item.children ? (
+            <div class="py-2">
+              <p
+                class={`text-sm tracking-wide ${
+                  isGroupActive(item) ? 'text-accent font-medium' : 'text-muted'
+                }`}
+              >
+                {item.label}
+              </p>
+              <div class="mt-1 ml-1 pl-3 border-l border-divider">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class={`block py-1.5 text-sm tracking-wide transition-colors ${
+                      isActive(child.href) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
+                    }`}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class={`block py-2 text-sm tracking-wide transition-colors ${
+                isActive(item.href!) ? 'text-accent font-medium' : 'text-ink hover:text-accent'
+              }`}
+            >
+              {item.label}
+            </a>
+          )
+        )
       }
     </div>
   </div>
@@ -82,4 +170,41 @@ const isActive = (href: string) =>
       mobileMenuButton.setAttribute('aria-expanded', String(open));
     });
   }
+
+  // Desktop dropdowns: open on hover for pointers, on click/Enter for keyboards.
+  document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
+    const trigger = dropdown.querySelector<HTMLButtonElement>('[data-dropdown-trigger]');
+    const panel = dropdown.querySelector<HTMLElement>('[data-dropdown-panel]');
+    const chevron = dropdown.querySelector<HTMLElement>('[data-dropdown-chevron]');
+    if (!trigger || !panel) return;
+
+    const setOpen = (open: boolean) => {
+      panel.classList.toggle('hidden', !open);
+      trigger.setAttribute('aria-expanded', String(open));
+      chevron?.classList.toggle('rotate-180', open);
+    };
+
+    dropdown.addEventListener('mouseenter', () => setOpen(true));
+    dropdown.addEventListener('mouseleave', () => setOpen(false));
+
+    trigger.addEventListener('click', () => {
+      setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Tabbing out of the group closes it.
+    dropdown.addEventListener('focusout', (event) => {
+      if (!dropdown.contains(event.relatedTarget as Node)) setOpen(false);
+    });
+
+    dropdown.addEventListener('keydown', (event) => {
+      if ((event as KeyboardEvent).key === 'Escape') {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target as Node)) setOpen(false);
+    });
+  });
 </script>

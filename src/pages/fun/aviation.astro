@@ -5,9 +5,20 @@ import fs from 'fs';
 import path from 'path';
 
 const airlinesPath = path.join(process.cwd(), 'content', 'aviation', 'airlines.json');
-const airlines = fs.existsSync(airlinesPath) 
+const airlines = fs.existsSync(airlinesPath)
   ? JSON.parse(fs.readFileSync(airlinesPath, 'utf-8'))
   : [];
+
+const airportsPath = path.join(process.cwd(), 'content', 'aviation', 'airports.json');
+const allAirports = fs.existsSync(airportsPath)
+  ? JSON.parse(fs.readFileSync(airportsPath, 'utf-8'))
+  : [];
+
+// Only airports carrying coordinates can be plotted; the rest are skipped rather
+// than silently dropped onto (0, 0).
+const airports = allAirports.filter(
+  (a: any) => typeof a.lat === 'number' && typeof a.lon === 'number'
+);
 ---
 
 <BaseLayout title="Aviation Corner | Jasmer Singh Sanjotra" description="Airlines flown, aircraft types, and Infinite Flight stats.">
@@ -19,16 +30,13 @@ const airlines = fs.existsSync(airlinesPath)
       <span>Back to Fun Stuff</span>
     </a>
     
-    <h1 class="page-title mb-4">Aviation Corner</h1>
-    
-    <div class="prose max-w-none mb-12 pb-6 border-b border-divider">
-      <p class="text-ink">
-        As an aviation enthusiast, I track the airlines I've flown, the aircraft types I've experienced, 
-        and maintain my Infinite Flight statistics. This section documents my journey through the skies, 
-        from commercial flights to virtual aviation experiences. Each airline entry includes the aircraft 
-        types flown, providing a detailed record of my aviation adventures.
+    <header class="page-header">
+      <h1 class="page-title">Aviation Corner</h1>
+      <p class="page-subtitle">
+        I like planes! And I like airlines even more. Here's everyone I've flown with, what they put me on,
+        and a few Infinite Flight numbers nobody asked for.
       </p>
-    </div>
+    </header>
     
     <!-- Airlines Section -->
     <section class="mb-16">
@@ -78,6 +86,32 @@ const airlines = fs.existsSync(airlinesPath)
       )}
     </section>
     
+    <!-- Airports Map Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6">Airports</h2>
+      {airports.length > 0 ? (
+        <>
+          <div
+            id="airport-map"
+            class="h-[24rem] sm:h-[30rem] w-full border border-divider"
+            role="region"
+            aria-label={`Map of ${airports.length} airports`}
+          />
+          <p class="mt-3 text-sm text-muted">
+            {airports.length} airport{airports.length === 1 ? '' : 's'}. Click a marker for details; use the
+            +/&minus; controls to zoom.
+          </p>
+          <script type="application/json" id="airport-data" set:html={JSON.stringify(airports)} />
+        </>
+      ) : (
+        <p class="text-muted">
+          No airports with coordinates yet. Add entries with <code class="text-sm bg-subtle px-2 py-1 rounded">lat</code>
+          and <code class="text-sm bg-subtle px-2 py-1 rounded">lon</code> to
+          <code class="text-sm bg-subtle px-2 py-1 rounded">content/aviation/airports.json</code>
+        </p>
+      )}
+    </section>
+
     <!-- Infinite Flight Section -->
     <section class="mb-16">
       <h2 class="text-2xl font-semibold mb-6">Infinite Flight</h2>
@@ -85,3 +119,75 @@ const airlines = fs.existsSync(airlinesPath)
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  // Leaflet is bundled from node_modules rather than a CDN, so the only external
+  // request the map makes is for the tiles themselves.
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  const container = document.getElementById('airport-map');
+  const dataEl = document.getElementById('airport-data');
+
+  if (container && dataEl) {
+    interface Airport {
+      code: string;
+      name: string;
+      city: string;
+      country: string;
+      lat: number;
+      lon: number;
+    }
+
+    const airports: Airport[] = JSON.parse(dataEl.textContent || '[]');
+
+    const escapeHtml = (value: string) =>
+      String(value ?? '').replace(/[&<>"']/g, (c) => {
+        const map: Record<string, string> = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        };
+        return map[c];
+      });
+
+    // scrollWheelZoom stays off so the map never hijacks page scrolling.
+    const map = L.map(container, { scrollWheelZoom: false, worldCopyJump: true });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    // The site's accent colour, so the markers follow the theme.
+    const accent =
+      getComputedStyle(document.documentElement).getPropertyValue('--global-theme-color').trim() || '#b509ac';
+
+    // circleMarker rather than the default pin: Leaflet's default icon points at
+    // image files by relative URL, which do not survive bundling.
+    const markers = airports.map((airport) =>
+      L.circleMarker([airport.lat, airport.lon], {
+        radius: 6,
+        color: accent,
+        weight: 2,
+        fillColor: accent,
+        fillOpacity: 0.55,
+      }).bindPopup(
+        `<strong>${escapeHtml(airport.code)}</strong> — ${escapeHtml(airport.name)}<br />` +
+          `${escapeHtml(airport.city)}, ${escapeHtml(airport.country)}`
+      )
+    );
+
+    markers.forEach((marker) => marker.addTo(map));
+
+    if (markers.length > 0) {
+      // maxZoom keeps a single marker from zooming all the way to street level.
+      map.fitBounds(L.featureGroup(markers).getBounds().pad(0.2), { maxZoom: 6 });
+    } else {
+      map.setView([20, 0], 2);
+    }
+  }
+</script>
+

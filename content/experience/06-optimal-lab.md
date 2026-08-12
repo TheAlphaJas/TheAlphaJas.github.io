@@ -3,7 +3,7 @@ order: 6
 organization: "OPTIMAL Research Group, IIT Indore"
 role: "Research Intern — Prof. M. Tanveer"
 location: "Indore, India"
-duration: "May 2024 – Present"
+duration: "May 2024 – November 2024"
 domain: "Audio-Visual Speech Enhancement"
 achievements:
   - "Developed LSTMSE-Net, an audio-visual speech enhancement model that isolates and enhances speaker audio in noisy environments"

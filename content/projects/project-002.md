@@ -26,7 +26,7 @@ date: "2024-08-01"
 
 ## Overview
 
-This project applies reinforcement learning to the classic Hangman game, training an agent to make optimal letter choices to maximize its chances of winning.
+This project applies reinforcement learning to the classic Hangman game, training an agent to choose letters that maximise its chance of winning.
 
 ## Problem Formulation
 
@@ -51,4 +51,4 @@ The agent uses a Deep Q-Network (DQN) architecture with:
 
 ## Results
 
-The trained agent achieved an 85%+ win rate, demonstrating effective learning of letter frequency patterns and strategic guessing.
+The trained agent achieved an 85%+ win rate across a vocabulary of 50k+ words.

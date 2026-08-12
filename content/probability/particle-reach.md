@@ -2,6 +2,7 @@
 title: Particle Reach
 topics:
   - Random Walks
+  - Conditional Probability
 ---
 
 Consider a particle that performs a random walk on the integers starting at position $$0$$. At each step, the particle moves from position $$i$$ to position $$i+1$$ with probability $$p$$, while the probability it moves from $$i$$ to $$i−1$$ is $$1−p$$. If $$p=\frac{1}{3}$$, find the probability the particle ever reaches position $$1$$

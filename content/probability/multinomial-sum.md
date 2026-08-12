@@ -2,7 +2,6 @@
 title: Multinomial Sum
 topics:
   - Combinatorics
-  - Counting
 ---
 
 Find the sum of all multinomial coefficients:
@@ -56,4 +55,4 @@ $$
 $$
 
 
-### Thus, the sum of all multinomial coefficients is $$\mathbf{16384}$$
+### Thus, the sum of all multinomial coefficients is $$16384$$

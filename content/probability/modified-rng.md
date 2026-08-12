@@ -1,9 +1,8 @@
 ---
 title: Modified RNG
 topics:
-  - Expectations
   - Conditional Expectation
-  - Conditional Variance
+  - Uniform Distribution
 ---
 
 Jimmy picks a number uniformly at random from (0,1). If Jimmy chooses x, then Jon picks a number from (x,1) uniformly at random. If Y represents the number Jon selects, in simplest form, find $$\frac{\mathbb{E}[Y]}{Var(Y)}$$
@@ -54,6 +53,6 @@ Therefore:
 
 $$Var(Y) = \frac{1}{36} + \frac{1}{48} = \frac{7}{144}$$
 
-### Final Answer
-
 $$\frac{\mathbb{E}[Y]}{Var(Y)} = \frac{3/4}{7/144} = \frac{108}{7}$$
+
+### Thus, the required ratio is $$\frac{\mathbb{E}[Y]}{Var(Y)} = \frac{108}{7}$$

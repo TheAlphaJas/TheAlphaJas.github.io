@@ -6,12 +6,11 @@ techStack:
   - PyTorch
   - Reinforcement Learning
   - Causal Inference
-  - MuJoCo
 results: "Improved sample efficiency and training stability under causal interventions and distribution shift, with theoretical regret guarantees."
 keyIdeas:
   - "Introduced causal-aware, action-independent baselines for variance reduction in policy gradients"
   - "Derived regret guarantees for the resulting estimators"
-  - "Validated on custom Structural Causal Models and continuous-control MuJoCo benchmarks"
+  - "Validated on custom Structural Causal Model (SCM) environments"
   - "Studied behaviour under interventions and distribution shift rather than only on-policy returns"
 tags:
   - RL
@@ -33,4 +32,4 @@ The same construction was applied to REINFORCE, PPO, and A2C, giving causal vari
 
 ## Evaluation
 
-Two settings were used: custom Structural Causal Models where the ground-truth causal graph is known, and continuous-control MuJoCo benchmarks. Beyond standard returns, the methods were evaluated under interventions and distribution shift — the regime where a causally-grounded baseline should help most, and where it does.
+Evaluation used custom Structural Causal Models, where the ground-truth causal graph is known. Beyond standard returns, the methods were evaluated under interventions and distribution shift — the regime where a causally-grounded baseline should help most, and where it does.

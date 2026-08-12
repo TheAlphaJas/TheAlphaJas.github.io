@@ -2,7 +2,6 @@
 title: Chess Tournament I
 topics:
   - Combinatorics
-  - Counting Principle
 ---
 
 A chess tournament has 128 players, each with a  distinct  rating. Assume that the player with the  higher rating always wins  against a lower rated opponent and that the winner proceeds to the subsequent round. What is the probability that the highest rated and second-highest rated players will  meet in the final ?
@@ -136,12 +135,4 @@ Simplifying:
 P(A) = \frac{64}{127}
  $$
 
----
-
-### Final Answer  
-
- $$
-\boxed{\frac{64}{127}}
- $$
-
-Thus, the probability that the  highest-rated and second-highest-rated players meet in the final  is  $$ \frac{64}{127}  $$.
+### Thus, the probability that the highest-rated and second-highest-rated players meet in the final is $$\frac{64}{127}$$

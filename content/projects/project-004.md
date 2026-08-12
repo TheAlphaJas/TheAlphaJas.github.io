@@ -28,7 +28,7 @@ date: "2023-05-01"
 
 ## Overview
 
-This project focuses on developing advanced deep learning models for liver tumor segmentation in medical images. The work involved comprehensive data handling, custom architecture design, and achieving state-of-the-art performance.
+This project focuses on U-Net based deep learning models for liver tumor segmentation in medical images. The work involved data pre-processing, custom architecture design, and evaluation on the segmentation task.
 
 ## Architecture
 
@@ -46,12 +46,7 @@ The model is based on U-Net architecture with several enhancements:
 
 ## Results
 
-Achieved state-of-the-art performance:
 - **98% accuracy** for liver tumor segmentation
 - Published in Elsevier Biomedical Signal Processing and Control
 - Co-authored research paper detailing methods and results
-
-## Impact
-
-This work contributes to the field of medical image analysis, providing accurate and efficient tools for liver tumor detection and segmentation, which can aid in early diagnosis and treatment planning.
 

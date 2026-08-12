@@ -27,13 +27,13 @@ date: "2024-05-01"
 
 ## Overview
 
-LSTMSE-Net is a novel audio-visual speech enhancement model developed to isolate and enhance speaker audio in noisy environments. The project focuses on leveraging both audio and visual cues to improve speech quality through deep learning techniques.
+LSTMSE-Net is an audio-visual speech enhancement model developed to isolate and enhance speaker audio in noisy environments. The project focuses on leveraging both audio and visual cues to improve speech quality through deep learning techniques.
 
 ## Methodology
 
 The model uses a temporal feature extraction pipeline that employs RNN and LSTM units to jointly model audio-visual dependencies. This approach allows the model to leverage visual information (lip movements, facial expressions) to better enhance the corresponding audio signal.
 
-## Key Innovations
+## Key Points
 
 - **Temporal Modeling**: RNN and LSTM units capture temporal dependencies in both audio and video streams
 - **Joint Audio-Visual Processing**: Simultaneous processing of audio and visual features for better enhancement
@@ -41,7 +41,6 @@ The model uses a temporal feature extraction pipeline that employs RNN and LSTM 
 
 ## Results
 
-The model achieved significant improvements:
 - 3× reduction in inference time compared to baseline
 - Improved speech quality metrics
 - Paper accepted at InterspeechW 2024

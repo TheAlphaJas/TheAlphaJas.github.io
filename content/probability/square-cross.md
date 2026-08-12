@@ -1,7 +1,9 @@
 ---
 title: Square Cross
 topics:
+  - Uniform Distribution
   - Integration
+  - Geometric Probability
 ---
 
 A square of side length $$20$$ is placed in front of you. You select a point uniformly at random from its interior. Then, independently, a circle of radius $$ R \sim \text{Unif}(0,10) $$ is formed around the selected point. What is the probability that this circle does not intersect the square at any point?
@@ -24,7 +26,7 @@ Try to visualize the locus of all points that are an equal distance from the clo
 
 The points that are an equal distance from the nearest edge form a square frame at distance $$ x $$. Here’s what it looks like:
 
-![Visualization]({{"/assets/images/squarecross.png" | relative_url}})
+![Locus of points at perpendicular distance x from the nearest edge of the square](/images/squarecross.png)
 
 _(Yeah ik the diagram kinda sucks, but I believe in MS-Paint XD. Anyhow)_
 

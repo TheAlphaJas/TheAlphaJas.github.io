@@ -2,6 +2,7 @@
 title: Pass the ball
 topics:
   - Conditional Probability
+  - Markov Chains
 ---
 
 You and 4 other people are sitting in a circle. You are given a ball to start the game. Every second of this game, the person with the ball has three choices they can make. They can either pass the ball to the left, pass the ball to the right, or keep the ball (all with equal probability). This game goes on till someone keeps the ball. What is the probability that you are the person to end the game and keep the ball?
@@ -101,4 +102,4 @@ $$
 a = \frac{5}{11}
 $$
 
-### Therefore, the probability that we(Person $$A$$) will end the game is $$\frac{5}{11}$$
+### Thus, the probability that we (Person $$A$$) end the game is $$\frac{5}{11}$$

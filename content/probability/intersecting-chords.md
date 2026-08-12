@@ -1,8 +1,8 @@
 ---
 title: Intersecting Chords
 topics:
+  - Expectation
   - Combinatorics
-  - Counting Principle
 ---
 
 10 chords with uniformly randomly chosen endpoints are drawn on a circle. What is the expected number of intersections?  
@@ -77,6 +77,6 @@ $$
 
 ---  
 
-### Therefore, the answer is **15** intersections.  
+### Thus, the expected number of intersections is $$15$$
 
 *(PS: On the website linked above, it shows incorrect for "15." One must enter "45/3" instead. A weird error, tbh. Possibly because 10C2 is 45, and p(for 2 chords) = 1/3, Thus 45/3)*

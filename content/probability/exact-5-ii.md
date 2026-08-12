@@ -1,8 +1,8 @@
 ---
 title: Exact 5 II
 topics:
-  - Statistics
-  - Expectations
+  - Expectation
+  - Geometric Distribution
 ---
 
 Abd continually rolls a fair $$6$$-sided die until he obtains his first $$6$$.  
@@ -56,10 +56,4 @@ E[X] - \frac{5}{6}E[X] = \frac{1}{6}
 \Rightarrow E[X] = 1
 $$
 
-### Final Answer
-
-So the expected number of times Abd rolls a $$5$$ before his first $$6$$ is:
-
-$$
-\boxed{1}
-$$
+### Thus, the expected number of times Abd rolls a $$5$$ before his first $$6$$ is $$1$$

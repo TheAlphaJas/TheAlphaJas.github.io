@@ -7,12 +7,13 @@ techStack:
   - Machine Learning
   - Neural Networks
 github: "https://github.com/TheAlphaJas"
-results: "Built core components including jTensor (custom tensor class with gradient tracking), a sequential model structure, and gradient descent optimization."
+results: "Built a custom autograd engine (jTensor) with dynamic computational graph construction and gradient tracking, plus vectorized modular layers, loss functions, and optimizers (SGD, Adam), enabling training of multi-layer perceptrons without high-level framework dependencies."
 keyIdeas:
   - "Implemented neural networks from scratch without using high-level frameworks"
   - "Created custom tensor class (jTensor) with automatic gradient tracking"
   - "Built sequential model structure for easy layer composition"
-  - "Implemented gradient descent optimization algorithms"
+  - "Implemented vectorized modular layers, loss functions, and optimizers (SGD, Adam)"
+  - "Trained multi-layer perceptrons without high-level framework dependencies"
 tags:
   - ML
   - Python
@@ -34,12 +35,11 @@ A custom tensor class that tracks gradients automatically, enabling backpropagat
 A flexible sequential model structure that allows easy composition of layers, similar to Keras but implemented from scratch.
 
 ### Optimization
-Implemented gradient descent and its variants, providing a foundation for training neural networks.
+Implemented SGD and Adam, alongside vectorized modular layers and loss functions, enough to train multi-layer perceptrons end to end.
 
 ## Learning Outcomes
 
 This project provided deep insights into:
 - How automatic differentiation works
 - The mechanics of backpropagation
-- Memory-efficient gradient computation
 - The internals of modern deep learning frameworks

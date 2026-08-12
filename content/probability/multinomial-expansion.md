@@ -2,7 +2,6 @@
 title: Multinomial Expansion
 topics:
   - Combinatorics
-  - Counting
 ---
 
 How many terms are there in the expansion of 
@@ -75,4 +74,4 @@ $$
 $$
 
 
-### Thus, the number of terms in the expansion is $$\mathbf{33649}$$
+### Thus, the number of terms in the expansion is $$33649$$

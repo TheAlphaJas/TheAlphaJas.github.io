@@ -1,7 +1,8 @@
 ---
 title: Graph Search II
 topics:
-  - Expectations
+  - Expectation
+  - Coupon Collector
 ---
 
 You are given an undirected graph with $$11$$ nodes. From every node, you are able to access any other node (not including itself), all with an equal probability of $$\frac{1}{10}$$. What is the expected number of steps to reach all nodes at least once (rounded to the nearest step)?
@@ -107,4 +108,4 @@ $$
 $$
 
 
-### Thus, the expected number of steps to visit all 11 nodes at least once is approximately **30.29**, which rounds to **30** steps.
+### Thus, the expected number of steps to visit all 11 nodes at least once is approximately $$30.29$$, which rounds to $$30$$ steps

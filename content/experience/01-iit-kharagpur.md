@@ -9,7 +9,7 @@ achievements:
   - "Research under Prof. Dibbendu Roy on causal reinforcement learning and world models, building on prior work in causally-aware policy optimization"
   - "Developing a framework to evaluate the causal capabilities of world models across Pearl's Ladder of Causation — association, intervention, and counterfactual reasoning"
   - "Designing a three-stage evaluation pipeline using CausalGym and custom environments to quantify causal understanding and intervention awareness in learned latent representations"
-  - "Three papers based on this work submitted to AAAI 2027"
+  - "Ongoing research submitted towards publication at AAAI 2027"
 techStack:
   - PyTorch
   - Reinforcement Learning

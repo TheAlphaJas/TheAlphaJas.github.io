@@ -1,7 +1,9 @@
 ---
 title: Random Ratio
 topics:
+  - Uniform Distribution
   - Integration
+  - Geometric Probability
 ---
 
 $$p$$ and $$q$$ are two points chosen at random between 0 and 1. What is the probability that the ratio $$p/q$$ lies between 1 and 2?
@@ -125,7 +127,7 @@ $$ = \frac{1}{8} + \frac{1}{2} - \frac{3}{8} = \frac{1}{4} $$
 
 
 
-### Therefore, the probability that the ratio $$p/q$$ lies between 1 and 2 is $$\frac{1}{4} $$ or $$0.25$$ or $$25\%$$.
+### Thus, the probability that the ratio $$p/q$$ lies between 1 and 2 is $$\frac{1}{4}$$
 
 ---
 

@@ -45,8 +45,12 @@ function filenameToSlug(filename) {
 function extractProblemName(filename) {
   return filename
     .replace(/\.cpp$/, '')
+    // "Farmer_John_s_Favorite" -> "Farmer John's Favorite"
+    .replace(/_s(_|$)/g, "'s$1")
     .replace(/_/g, ' ')
-    .replace(/\b\w/g, (l) => l.toUpperCase());
+    // Capitalise word-initial letters only. \b\w also fires after an accented
+    // character, which turned "Gokce" (with diacritics) into "GoKcE".
+    .replace(/(^|\s)(\p{L})/gu, (_m, sep, ch) => sep + ch.toUpperCase());
 }
 
 // Function to extract division and topic from path

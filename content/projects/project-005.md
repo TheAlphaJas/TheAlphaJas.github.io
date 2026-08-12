@@ -9,12 +9,12 @@ techStack:
   - Signal Processing
   - UNet
 github: "https://github.com/TheAlphaJas"
-results: "Designed and implemented UNet-inspired deep learning architectures achieving Normalized Mean Squared Error (NMSE) in the order of 1e-3. Work under patent filing process for potential impact on future 6G physical layer standards."
+results: "Designed and implemented UNet-inspired deep learning architectures achieving Normalized Mean Squared Error (NMSE) in the order of 1e-3. Co-authored an innovation currently under internal patent filing."
 keyIdeas:
   - "Collaborated with 6G Standards Team at Samsung R&D Institute India"
   - "Designed UNet-inspired architectures for CSI-RS processing"
-  - "Achieved state-of-the-art performance with NMSE ~1e-3"
-  - "Patent filing in process for 6G physical layer standards"
+  - "Reached an NMSE in the order of 1e-3 on sparse, complex-valued 2D-FFT signals"
+  - "Co-authored an innovation currently under internal patent filing"
 tags:
   - ML
   - Deep Learning
@@ -27,7 +27,7 @@ date: "2025-05-01"
 
 ## Overview
 
-This project involved developing innovative machine learning-based solutions for Channel State Information Reference Signal (CSI-RS) processing in 6G communication systems. The work was conducted in collaboration with the 6G Standards Team at Samsung R&D Institute India.
+This project involved developing novel deep learning frameworks for Channel State Information Reference Signal (CSI-RS) recovery in 6G communication systems. The work was conducted in collaboration with the 6G Standards Team at Samsung R&D Institute India.
 
 ## Problem Statement
 
@@ -42,12 +42,6 @@ The solution uses UNet-inspired deep learning architectures, which are well-suit
 
 ## Results
 
-Achieved exceptional performance:
-- **NMSE in the order of 1e-3** - significantly better than traditional methods
-- Efficient processing suitable for real-time applications
-- **Patent filing in process** due to potential impact on 6G physical layer standards
-
-## Impact
-
-This work has significant implications for future 6G communication systems, potentially influencing physical layer standards. The patent filing process reflects the innovative nature and commercial potential of the solution.
+- **NMSE in the order of 1e-3** on sparse, complex-valued 2D-FFT signals
+- Co-authored an innovation currently under **internal patent filing**
 

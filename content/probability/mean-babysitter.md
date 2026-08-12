@@ -2,7 +2,6 @@
 title: Mean babysitter
 topics:
   - Combinatorics
-  - Counting
 ---
 
 10 kids are really hungry! Their babysitter has 12 units of food to give. However, she decides she only wants to give 4 of the children food. How many ways can she distribute the food units such that 6 of the children are hungry (receive no food), and the other 4 children receive at least 1 unit of food each?
@@ -71,4 +70,4 @@ $$
 $$
 
 
-### Therefore, the total number of ways is $$\mathbf{34650}$$
+### Thus, the total number of ways is $$34650$$

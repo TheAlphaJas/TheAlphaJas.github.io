@@ -121,6 +121,13 @@ html.dark {
   }
 }
 
+/* Hand-drawn figures in the write-ups are white-background PNGs, so frame them
+   and keep the plate white — otherwise they read as bare white blocks in dark mode. */
+.prose img {
+  @apply block mx-auto rounded-md border border-divider p-2;
+  background-color: #ffffff;
+}
+
 /* KaTeX */
 .katex {
   font-size: 1.05em;
@@ -146,4 +153,21 @@ code[class*='language-'] {
 .leaflet-container {
   @apply rounded-md;
   z-index: 0;
+  background: var(--global-subtle-bg-color);
+}
+
+/* OpenStreetMap only ships light tiles, so invert them for the dark theme.
+   Applied to the tile pane alone, to leave controls and popups untouched. */
+html.dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
+}
+
+html.dark .leaflet-popup-content-wrapper,
+html.dark .leaflet-popup-tip {
+  background: var(--global-card-bg-color);
+  color: var(--global-text-color);
+}
+
+.leaflet-control-attribution {
+  font-size: 0.65rem;
 }

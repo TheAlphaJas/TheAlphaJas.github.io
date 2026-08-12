@@ -1,6 +1,7 @@
 ---
 title: Breaking Stick
 topics:
+  - Expectation
   - Uniform Distribution
   - Integration
 ---
@@ -87,10 +88,4 @@ $$
 = \frac{L}{4}
 $$
 
-### Final Answer
-
-Thus, the expected length of the smaller part is:
-
-$$
-\boxed{\frac{L}{4}}
-$$
+### Thus, the expected length of the smaller part is $$\frac{L}{4}$$

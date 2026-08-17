@@ -16,7 +16,11 @@ const profilePic = fs.existsSync(imgDir)
 const news = [
   {
     date: 'Aug 2026',
-    text: 'Research on causal reinforcement learning and world models submitted to AAAI 2027.',
+    text: '3 papers on causal reinforcement learning and world models submitted to AAAI 2027.',
+  },
+  {
+    date: 'Jun 2026',
+    text: 'Graduated from IIT Indore with a B.Tech in Electrical Engineering.',
   },
   {
     date: 'Jun 2026',
@@ -25,6 +29,10 @@ const news = [
   {
     date: 'May 2026',
     text: 'Started as a research intern at IIT Kharagpur, working on causal reinforcement learning and world models.',
+  },
+  {
+    date: 'May 2026',
+    text: 'Attended ICASSP 2026 to present my work on in-the-wild TTS evaluation at the IEEE SPS SigMA special session.',
   },
 ];
 ---
@@ -73,7 +81,7 @@ const news = [
     </div>
 
     <section class="mt-16 pt-8 border-t border-divider">
-      <h2 class="section-title mb-6">News</h2>
+      <h2 class="section-title mb-6">Recent News</h2>
       <ul class="space-y-4">
         {
           news.map((item) => (

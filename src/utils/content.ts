@@ -77,6 +77,16 @@ export interface CSESEntry {
   content: string;
 }
 
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date?: string;
+  summary: string;
+  tags: string[];
+  content: string;
+  readingMinutes: number;
+}
+
 export function getProjects(): Project[] {
   const projectsDir = path.join(process.cwd(), 'content', 'projects');
   if (!fs.existsSync(projectsDir)) return [];
@@ -336,5 +346,42 @@ export function getCSESEntries(): CSESEntry[] {
 export function getCSESEntry(slug: string): CSESEntry | null {
   const entries = getCSESEntries();
   return entries.find((e) => e.slug === slug) || null;
+}
+
+export function getBlogPosts(): BlogPost[] {
+  const blogDir = path.join(process.cwd(), 'content', 'blogs');
+  if (!fs.existsSync(blogDir)) return [];
+
+  const files = fs.readdirSync(blogDir);
+  return files
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const filePath = path.join(blogDir, file);
+      const { data, content } = matter(fs.readFileSync(filePath, 'utf-8'));
+
+      // Rough reading estimate at 200 wpm, with math stripped so a page of
+      // display equations does not read as a page of prose.
+      const words = content
+        .replace(/\$\$[\s\S]*?\$\$/g, ' ')
+        .split(/\s+/)
+        .filter(Boolean).length;
+
+      return {
+        slug: file.replace('.md', ''),
+        title: data.title || '',
+        date: data.date,
+        summary: data.summary || '',
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        content,
+        readingMinutes: Math.max(1, Math.round(words / 200)),
+      };
+    })
+    // Newest first; posts without a date sink to the bottom.
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+}
+
+export function getBlogPost(slug: string): BlogPost | null {
+  const posts = getBlogPosts();
+  return posts.find((p) => p.slug === slug) || null;
 }
 

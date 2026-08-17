@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getBlogPosts } from '../../../utils/content';
+import { renderMarkdown } from '../../../utils/markdown';
+
+export async function getStaticPaths() {
+  const posts = getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const contentHtml = await renderMarkdown(post.content);
+
+const formattedDate = post.date
+  ? new Date(`${post.date}T00:00:00Z`).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    })
+  : '';
+---
+
+<BaseLayout title={`${post.title} | Blogs`} description={post.summary || post.title}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-center gap-4 mb-6">
+      <a href="/fun" class="text-muted hover:text-accent inline-flex items-center space-x-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span>Fun Stuff</span>
+      </a>
+      <span class="text-muted">/</span>
+      <a href="/fun/blogs" class="text-muted hover:text-accent">Blogs</a>
+    </div>
+
+    <article class="prose max-w-none">
+      <h1 class="font-serif text-3xl font-medium text-ink mb-3">{post.title}</h1>
+
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 not-prose">
+        {formattedDate && <span class="text-sm font-mono text-muted">{formattedDate}</span>}
+        <span class="text-sm text-muted">&middot;</span>
+        <span class="text-sm text-muted">{post.readingMinutes} min read</span>
+        {post.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 w-full sm:w-auto sm:ml-1">
+            {post.tags.map((tag) => (
+              <span class="pill">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="border-t border-divider pt-8" set:html={contentHtml} />
+    </article>
+
+    <div class="mt-14 pt-6 border-t border-divider">
+      <a href="/fun/blogs" class="text-sm text-muted hover:text-accent inline-flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span>all blogs</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

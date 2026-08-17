@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getBlogPosts } from '../../../utils/content';
+
+const posts = getBlogPosts();
+
+const formatDate = (date?: string) =>
+  date
+    ? new Date(`${date}T00:00:00Z`).toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'UTC',
+      })
+    : '';
+---
+
+<BaseLayout title="Blogs | Jasmer Singh Sanjotra" description="Small writeups about whatever I found interesting.">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <a href="/fun" class="text-sm text-muted hover:text-accent transition-colors inline-flex items-center gap-2 mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      <span>back to fun</span>
+    </a>
+
+    <header class="page-header">
+      <h1 class="page-title">Blogs</h1>
+      <p class="page-subtitle">
+        I talk about stuff here. Small writeups of whatever I may have found interesting.
+      </p>
+    </header>
+
+    {
+      posts.length > 0 ? (
+        <div class="space-y-3">
+          {posts.map((post) => (
+            <a href={`/fun/blogs/${post.slug}`} class="card block p-5">
+              <div class="sm:flex sm:items-baseline sm:justify-between sm:gap-4">
+                <h2 class="font-serif text-lg text-ink">{post.title}</h2>
+                <p class="mt-1 sm:mt-0 text-sm font-mono text-muted sm:flex-none">
+                  {formatDate(post.date)}
+                </p>
+              </div>
+
+              {post.summary && <p class="mt-2 text-sm text-muted">{post.summary}</p>}
+
+              <div class="mt-3 flex flex-wrap items-center gap-1.5">
+                {post.tags.map((tag) => (
+                  <span class="pill">{tag}</span>
+                ))}
+                <span class="text-xs text-muted ml-1">{post.readingMinutes} min read</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="text-muted">
+          Nothing here yet. Add a Markdown file to
+          <code class="text-sm bg-subtle px-2 py-1 rounded">content/blogs/</code>
+        </p>
+      )
+    }
+  </div>
+</BaseLayout>

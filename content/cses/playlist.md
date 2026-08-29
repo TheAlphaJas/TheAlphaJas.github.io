@@ -1,13 +1,13 @@
 ---
-problemName: "Apartments"
+problemName: "Playlist"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Sort both arrays, then two-pointer sweep matching each applicant to the closest apartment within tolerance k."
+keyIdea: "Sliding window keeping the last-seen position of every song, shrinking the window whenever a repeat appears."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Apartments.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Playlist.cpp"
 ---
 
 ## Solution
@@ -19,31 +19,26 @@ using namespace std;
 #define ll long long
 #define lli long long int
 #define pb push_back
-#define rep(var, start, num) for(ulli var = start; var <start + num; var++)
+#define rep(var, start, num) for(ll var = start; var <start + num; var++)
 #define all(x) x.begin(), x.end()
 #define ulli unsigned long long int
 #define ull unsigned long long
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,m,k;
-    cin>>n>>m>>k;
-    int a[n];
+    ll n;
+    cin>>n;
+    vector<ll> a(n);
     rep(i,0,n) {cin>>a[i];}
-    int b[m];
-    rep(i,0,m) {cin>>b[i];}
-    sort(a,a+n);
-    sort(b,b+m);
-    int j=0;
-    int i=0;
-    int cnt=0;
-    while(1) {
-        if (abs(a[i]-b[j]) <= k) {i++; j++; cnt++;} else {
-            if (a[i]>b[j]) {j++;} else {i++;}
-        }
-        if (i==n || j==m) {break;}
-    }
-    cout<<cnt<<endl;
+    map<ll,bool> seen;
+    map<ll,ll> pos;
+    ll ans=0;
+    ll runans=0;
+    rep(i,0,n) {
+        if (seen[a[i]]) {runans=min(i-pos[a[i]], runans+1); pos[a[i]]=i;} else {runans++; seen[a[i]]=1; pos[a[i]]=i;}
+        ans=max(ans,runans);
+    }  
+    cout<<ans<<endl;
 }
 
 int main() {

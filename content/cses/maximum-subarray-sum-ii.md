@@ -1,13 +1,13 @@
 ---
-problemName: "Apartments"
+problemName: "Maximum Subarray Sum II"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Sort both arrays, then two-pointer sweep matching each applicant to the closest apartment within tolerance k."
+keyIdea: "Prefix sums plus a sliding multiset of window-start prefix sums to bound the subarray length between a and b."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Apartments.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Maximum_Subarray_Sum_II.cpp"
 ---
 
 ## Solution
@@ -19,31 +19,29 @@ using namespace std;
 #define ll long long
 #define lli long long int
 #define pb push_back
-#define rep(var, start, num) for(ulli var = start; var <start + num; var++)
+#define rep(var, start, num) for(ll var = start; var <start + num; var++)
 #define all(x) x.begin(), x.end()
 #define ulli unsigned long long int
 #define ull unsigned long long
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,m,k;
-    cin>>n>>m>>k;
-    int a[n];
-    rep(i,0,n) {cin>>a[i];}
-    int b[m];
-    rep(i,0,m) {cin>>b[i];}
-    sort(a,a+n);
-    sort(b,b+m);
-    int j=0;
-    int i=0;
-    int cnt=0;
-    while(1) {
-        if (abs(a[i]-b[j]) <= k) {i++; j++; cnt++;} else {
-            if (a[i]>b[j]) {j++;} else {i++;}
+    int n,a,b;
+    cin>>n>>a>>b;
+    vector<ll> arr(n+1), pf(n+1,0);
+    multiset<ll> pfs;
+    ll ans{INT64_MIN};
+    rep(i,1,n) {cin>>arr[i]; pf[i]=(pf[i-1]+arr[i]);}
+    rep(i,1,n) {
+        if (i>=a) {
+            pfs.insert(pf[i-a]);
+            ans=max(ans, pf[i]-(*pfs.begin()));
+        } 
+        if (i>=b) {
+            pfs.erase(pfs.find(pf[i-b]));
         }
-        if (i==n || j==m) {break;}
-    }
-    cout<<cnt<<endl;
+    }      
+    cout<<ans;
 }
 
 int main() {

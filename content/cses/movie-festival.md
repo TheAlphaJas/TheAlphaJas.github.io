@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Greedy interval scheduling: sort by end time and take a movie whenever it starts after the last one ends."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Movie_Festival.cpp"
 ---
 
 ## Solution
@@ -28,16 +28,17 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n;
     cin>>n;
-    vector<pair<int,int>> v,v1;
-    int a,b;
-    rep(i,0,n) {cin>>a>>b; v.pb({b,a});}
-    sort(all(v));
-    int c=1;
-    int p = v[0].first;
-    rep(i,1,n-1) {
-        if (v[i].second >= p) { p = v[i].first; c++;}
+    vector<pair<int,int>> mov(n);
+    rep(i,0,n) {
+        cin>>mov[i].second>>mov[i].first;
     }
-    cout<<c;
+    sort(all(mov));
+    int cnt{0};
+    int etime{-1};
+    rep(i,0,n) {
+        if (mov[i].second >= etime) {cnt++; etime=mov[i].first;}
+    }
+    cout<<cnt<<endl;
 }
 
 int main() {
@@ -52,5 +53,4 @@ int main() {
         solve();
     }
 }
-
 ```

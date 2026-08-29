@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Sort the coins and greedily extend the reachable prefix sum, stopping at the first gap."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Missing_Coin_Sum.cpp"
 ---
 
 ## Solution
@@ -28,25 +28,23 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n;
     cin>>n;
-    long long int a[n];
-    long long int s=0;
-    bool fl=0;
+    int a[n];
     rep(i,0,n) {cin>>a[i];}
     sort(a,a+n);
-    if (a[0]!=1) {
-        cout<<1<<endl;
-    } else {
-        s = a[0];
-        for(int i=1;i<n;i++) {
-            if (a[i] > s+1) {cout<<s+1<<endl; fl=1; break;} else {
-                s+=a[i];
-            }
-        }
-        if (fl==0) {
+    ll s=0;
+    bool fl=0;
+    rep(i,0,n) {
+        if (a[i]>s+1) {
             cout<<s+1<<endl;
+            fl=1;
+            break;
+        } else {
+            s+=a[i];
         }
-    }
+    }      
+    if (!fl) {cout<<s+1<<endl;}
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);

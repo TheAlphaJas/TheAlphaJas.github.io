@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Kadane's algorithm: extend the running sum while it helps, and reset once it turns negative."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Maximum_Subarray_Sum.cpp"
 ---
 
 ## Solution
@@ -28,16 +28,23 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n;
     cin>>n;
-    long long int a[n];
-    rep(i,0,n) {cin>>a[i];}
-    long long int s=a[0];
-    long long int ms=s;
-    for(int i=1;i<n;i++) {
-        s = max(s+a[i],a[i]);
-        ms = max(ms,s);
+    ll a[n];
+    ll ans=INT_MIN;
+    rep(i,0,n) {cin>>a[i]; ans=max(ans,a[i]);}
+    lli cs=0;
+    rep(i,0,n) {
+        if (cs>0) {
+            ans=max(ans,cs+a[i]);
+            cs+=a[i];
+        } else {
+            cs=a[i];
+            ans=max(ans,a[i]);
+        }
     }
-    cout<<ms<<endl;
+    cout<<ans<<endl;
+
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);

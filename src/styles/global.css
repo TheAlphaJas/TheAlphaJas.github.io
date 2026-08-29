@@ -139,14 +139,87 @@ html.dark {
   overflow-y: hidden;
 }
 
-/* Code blocks */
-pre[class*='language-'] {
-  @apply rounded-md p-4 overflow-x-auto border border-divider;
-  background-color: var(--global-code-bg-color);
+/* Code blocks. Fixed dark theme regardless of site light/dark mode — like an
+   editor pane, not a themed prose box — so solutions read as code rather
+   than as another paragraph of write-up. */
+pre[class*='language-'],
+.prose pre[class*='language-'] {
+  @apply rounded-md p-4 overflow-x-auto border-0;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-code[class*='language-'] {
-  @apply text-sm;
+code[class*='language-'],
+.prose code[class*='language-'] {
+  @apply text-sm leading-relaxed;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-weight: 400;
+  tab-size: 4;
+}
+
+.prose pre[class*='language-'] code {
+  padding: 0;
+  background: none;
+}
+
+/* Prism token colours (GitHub Dark palette) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #8b949e;
+  font-style: italic;
+}
+.token.punctuation {
+  color: #c9d1d9;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #79c0ff;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a5d6ff;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+  color: #ff7b72;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.directive,
+.token.directive-hash {
+  color: #ff7b72;
+}
+.token.function,
+.token.class-name {
+  color: #d2a8ff;
+}
+.token.regex,
+.token.important {
+  color: #ffa657;
+}
+.token.important,
+.token.bold {
+  font-weight: 700;
+}
+.token.italic {
+  font-style: italic;
 }
 
 /* Leaflet map */

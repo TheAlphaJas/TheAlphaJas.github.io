@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Insert every value into a map and read off the number of distinct keys."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Distinct_Numbers.cpp"
 ---
 
 ## Solution
@@ -26,13 +26,16 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n;
+    int n,k;
     cin>>n;
-    set<int> S;
-    int k;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    cout<<S.size()<<endl;
+    map<int,int> mp;
+    rep(i,0,n) {
+        cin>>k;
+        mp[k]++;
+    }      
+    cout<<mp.size()<<endl;
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);
@@ -40,7 +43,7 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    //cin >> tc;
+    // cin >> tc;
     for (int t = 1; t <= tc; t++) {
         solve();
     }

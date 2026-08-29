@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Distinct Values Subsequences"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Count value frequencies, then multiply (count + 1) across all values and subtract 1 for the empty subsequence."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Distinct_Values_Subsequences.cpp"
 ---
 
 ## Solution
@@ -24,30 +24,19 @@ using namespace std;
 #define ulli unsigned long long int
 #define ull unsigned long long
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
-
+ll MOD=1e9 + 7;
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
-        }
-    }
-    cout<<ans<<endl;
+    int n,k;
+    cin>>n;
+    map<ll,ll> mp;
+    rep(i,0,n) {cin>>k; mp[k]++;}
+    ll ans=1;
+    for(auto x:mp) {
+        ans=(ans%MOD*(x.second + 1)%MOD)%MOD;
+    }      
+    ans--;
+    ans=ans%MOD;
+    cout<<ans;
 }
 
 int main() {

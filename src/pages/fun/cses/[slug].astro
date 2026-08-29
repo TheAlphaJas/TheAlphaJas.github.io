@@ -13,6 +13,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const htmlContent = await renderMarkdown(entry.content);
+const codeSnippetHtml = entry.codeSnippet
+  ? await renderMarkdown(`\`\`\`${entry.language.toLowerCase()}\n${entry.codeSnippet}\n\`\`\``)
+  : null;
 ---
 
 <BaseLayout title={`${entry.problemName} | CSES`} description={`CSES problem: ${entry.problemName}`}>
@@ -51,6 +54,19 @@ const htmlContent = await renderMarkdown(entry.content);
           {entry.language && (
             <span class="text-muted">{entry.language}</span>
           )}
+          {entry.github && (
+            <a
+              href={entry.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link inline-flex items-center gap-1.5 ml-auto"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .5C5.73.5.98 5.24.98 11.52c0 4.94 3.2 9.14 7.65 10.63.56.1.76-.24.76-.54 0-.27-.01-1.16-.02-2.11-3.11.68-3.77-1.32-3.77-1.32-.51-1.29-1.24-1.64-1.24-1.64-1.01-.69.08-.67.08-.67 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.24.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.62 5.24-5.11 5.52.4.35.76 1.03.76 2.08 0 1.5-.01 2.71-.01 3.08 0 .3.2.65.77.54A11.03 11.03 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5Z" />
+              </svg>
+              <span>View source on GitHub</span>
+            </a>
+          )}
         </div>
         {entry.keyIdea && (
           <p class="text-muted mt-4 italic">
@@ -59,10 +75,10 @@ const htmlContent = await renderMarkdown(entry.content);
         )}
       </header>
       
-      {entry.codeSnippet && (
+      {codeSnippetHtml && (
         <div class="mb-8 border-t border-divider pt-6">
           <h2 class="text-xl font-semibold mb-4">Code</h2>
-          <pre class="bg-subtle text-ink p-4 rounded-md border border-divider overflow-x-auto"><code>{entry.codeSnippet}</code></pre>
+          <div set:html={codeSnippetHtml} />
         </div>
       )}
       

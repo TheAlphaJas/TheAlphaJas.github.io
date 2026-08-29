@@ -74,6 +74,7 @@ export interface CSESEntry {
   keyIdea: string;
   codeSnippet?: string;
   language: string;
+  github?: string;
   content: string;
 }
 
@@ -331,6 +332,7 @@ export function getCSESEntries(): CSESEntry[] {
         keyIdea: data.keyIdea || '',
         codeSnippet: data.codeSnippet,
         language: data.language || 'C++',
+        github: data.github,
         content,
       };
     })

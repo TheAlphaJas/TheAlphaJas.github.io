@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Movie Festival II"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Greedy interval scheduling generalized to k halls, tracked as a multiset of k free end times."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Movie_Festival_II.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,26 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
+    int n,k;
+    cin>>n>>k;
+    vector<pair<int,int>> v(n);
+    rep(i,0,n) {
+        cin>>v[i].second>>v[i].first;
+    }
+    sort(all(v));
+    int cnt{0};
     multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
+    rep(i,0,k) {S.insert(0);}
+    rep(i,0,n){
+        auto it = S.upper_bound(v[i].second);
+        if (it!=S.begin()) {
+            it--;
+            S.erase(it);
+            S.insert(v[i].first);
+            cnt++;
         }
     }
-    cout<<ans<<endl;
+    cout<<cnt;
 }
 
 int main() {

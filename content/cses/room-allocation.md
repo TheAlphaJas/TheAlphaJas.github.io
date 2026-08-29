@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Room Allocation"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Sweep arrival/departure events in time order, assigning the smallest currently free room number."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Room_Allocation.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,34 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
+    set<tuple<int,int,int>> S;
+    int n;
+    cin>>n;
+    int a,b;
+    rep(i,0,n) {
+        cin>>a>>b;
+        S.insert({a,0,i});
+        S.insert({b,1,i});
+    } 
+    vector<int> rooms(n,-1);
+    set<int> arooms;
+    int mx=0;
+    rep(i,1,n) {arooms.insert(i);}
+    while(!S.empty()) {
+        auto [curtime, isdep, idx] = *(S.begin());
         S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
+        if (isdep) {
+            arooms.insert(rooms[idx]);
+        } else {
+            int curroom = *arooms.begin();
+            rooms[idx]=curroom;
+            mx=max(mx,curroom);
+            arooms.erase(arooms.begin());
         }
     }
-    cout<<ans<<endl;
+    cout<<mx<<endl;
+    rep(i,0,n) {cout<<rooms[i]<<" ";}
+
 }
 
 int main() {

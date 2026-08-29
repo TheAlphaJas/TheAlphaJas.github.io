@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Single pass over the positions array, counting how often the next number appears before the current one."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Collecting_Numbers.cpp"
 ---
 
 ## Solution
@@ -26,25 +26,20 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n;
+    int n,k;
     cin>>n;
-    int a[n];
-    rep(i,0,n) {cin>>a[i];}
-    sort(a,a+n);
-    reverse(a,a+n);
-    int ans=1;
-    int cnt=1;
-    int mine = INT_MAX;
+    vector<int> a(n);
     rep(i,0,n) {
-        if (a[i] < mine) {
-            mine = a[i];
-            ans = max(ans,cnt);
-            cnt=1;
-        } else if (a[i] > mine) {
-            
-        }
+        cin>>k;
+        a[k-1]=i;
     }
+    int ans=0;
+    rep(i,1,n-1) {
+        if (a[i] < a[i-1]) {ans++;}
+    }
+    cout<<1+ans<<endl;
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);
@@ -52,7 +47,7 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    //cin >> tc;
+    // cin >> tc;
     for (int t = 1; t <= tc; t++) {
         solve();
     }

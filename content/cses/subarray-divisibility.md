@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Subarray Divisibility"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Prefix sums modulo n, counting subarrays with remainder 0 via combinatorics on matching remainders."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Subarray_Divisibility.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,26 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
-        }
+    int n;
+    cin>>n;
+    vector<ll> a(n);
+    rep(i,0,n) {cin>>a[i];}
+    vector<ll> pf(n);
+    vector<ll> cnts(n,0);
+    
+    pf[0]=(a[0]%n+n)%n;
+    cnts[pf[0]]++;
+    rep(i,1,n-1) {
+        pf[i] = ((pf[i-1]%n+n)%n + (a[i]%n+n)%n)%n;
+        cnts[pf[i]]++;
+    }   
+    ll z=0;   
+    rep(i,0,n) {
+        ll tp = (cnts[i]*(cnts[i]-1))/2;
+        z+=tp;
     }
-    cout<<ans<<endl;
+    z+=cnts[0];
+    cout<<z<<endl;
 }
 
 int main() {

@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Towers"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Patience-sorting greedy: place each cube on the smallest existing tower it still fits on, else start a new tower."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Towers.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,22 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    rep(i,0,n) {cin>>a[i];}
     multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
+    S.insert(a[0]);
+    ll ans=0;
+    rep(i,1,n-1) {
+        auto it = S.upper_bound(a[i]);
+        if (it==S.end()) {S.insert(a[i]);} else {
+            S.erase(it);
+            S.insert(a[i]);
         }
-    }
-    cout<<ans<<endl;
+        ans=max(ans,(ll)S.size());
+    }      
+    cout<<ans;
 }
 
 int main() {

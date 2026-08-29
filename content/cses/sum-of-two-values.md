@@ -1,13 +1,13 @@
 ---
-problemName: "Sum Of Two Values"
+problemName: "Sum of Two Values"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Hashmap of value positions to find a complementary pair in one pass."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Sum_of_Two_Values.cpp"
 ---
 
 ## Solution
@@ -28,32 +28,31 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n,x;
     cin>>n>>x;
-    int a[n];
-    rep(i,0,n) {cin>>a[i];}
-    map<int,vector<int>> mp;
-    vector<int> ans(2,-1);
-    rep(i,0,n) {mp[a[i]].pb(i);}
+    vector<int> a(n);
+    map<int,int> mp;
+    map<int,vector<int>> pos;
+    rep(i,0,n) {cin>>a[i]; mp[a[i]]++; pos[a[i]].pb(i);}
+    bool fl=0;
     rep(i,0,n) {
-        if (x-a[i] == a[i]) {
-            if (mp[a[i]].size() >= 2) {
-                ans[0] = mp[a[i]][0];
-                ans[1] = mp[a[i]][1];
+        if (x-a[i]!=a[i]) {
+            if (mp[x-a[i]]) {
+                cout<<i+1<<" "<<pos[x-a[i]][0]+1<<endl;
+                fl=1;
                 break;
             }
-            continue;
-        }
-        if (mp[x-a[i]].size()!=0) {
-            ans[0] = i;
-            ans[1] = mp[x-a[i]][0];
-            break;
+        } else {
+            if (mp[a[i]]>1) {
+                cout<<pos[a[i]][0]+1<<" "<<pos[a[i]][1]+1<<endl;
+                fl=1;
+                break;
+            }
         }
     }
-    if (ans[0]==-1) {
+    if (!fl) {
         cout<<"IMPOSSIBLE\n";
-    } else {
-        cout<<min(ans[0],ans[1])+1<<" "<<max(ans[0],ans[1])+1<<endl;
-    }    
+    }
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);

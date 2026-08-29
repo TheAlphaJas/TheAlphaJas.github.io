@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Factory Machines"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Binary search on time, checking whether all machines together can produce enough units by that time."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Factory_Machines.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,27 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
+    ull n,m;
+    cin>>n>>m;
+    vector<ull> a(n);
+    rep(i,0,n) {cin>>a[i];}
+    ull l = 0;
+    ull r = INT64_MAX;
+    auto checkbruh = [&](ull time){
+        ull s=0;
+        rep(i,0,n) {s+=(time/a[i]);}
+        return (s>=m);
+    };
+    while(l!=r) {
+        if (r-l==1) {break;}
+        ull m = (l+r)/2;
+        if (checkbruh(m)) {
+            r=m;
+        } else {
+            l=m+1;
         }
-    }
-    cout<<ans<<endl;
+    }      
+    if (checkbruh(l)) {cout<<l;} else {cout<<r;}
 }
 
 int main() {

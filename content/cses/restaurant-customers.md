@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Sort arrivals and departures separately, binary searching departures to count customers still present at each arrival."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Restaurant_Customers.cpp"
 ---
 
 ## Solution
@@ -19,7 +19,7 @@ using namespace std;
 #define ll long long
 #define lli long long int
 #define pb push_back
-#define rep(var, start, num) for(ulli var = start; var <start + num; var++)
+#define rep(var, start, num) for(long var = start; var <start + num; var++)
 #define all(x) x.begin(), x.end()
 #define ulli unsigned long long int
 #define ull unsigned long long
@@ -28,21 +28,17 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n;
     cin>>n;
-    int a,b;
-    vector<pair<int,int>> v;
+    vector<int> arr(n), dep(n);
+    rep(i,0,n) {cin>>arr[i]>>dep[i];}
+    sort(all(arr)); sort(all(dep));
+    long ans{0};
+    long ndep{0};
     rep(i,0,n) {
-        cin>>a>>b;
-        v.pb({a,1});
-        v.pb({b,-1});
+        auto it = upper_bound(all(dep), arr[i]);
+        if (it!=dep.begin()){it--; ndep=abs(distance(dep.begin(),it))+1;}
+        ans = max(ans, i+1-ndep);
     }
-    sort(all(v));
-    int cnt=0;
-    int mc=0;
-    for(auto x:v) {
-        cnt += x.second;
-        mc = max(mc,cnt);
-    }
-    cout<<mc<<endl;
+    cout<<ans<<endl;
 }
 int main() {
     //add quotes incase input output file

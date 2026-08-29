@@ -1,13 +1,13 @@
 ---
-problemName: "Apartments"
+problemName: "Distinct Values Subarrays"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Sort both arrays, then two-pointer sweep matching each applicant to the closest apartment within tolerance k."
+keyIdea: "Sliding window tracking the most recent duplicate position, counting subarrays ending at i with all distinct values."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Apartments.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Distinct_Values_Subarrays.cpp"
 ---
 
 ## Solution
@@ -19,31 +19,28 @@ using namespace std;
 #define ll long long
 #define lli long long int
 #define pb push_back
-#define rep(var, start, num) for(ulli var = start; var <start + num; var++)
+#define rep(var, start, num) for(ll var = start; var <start + num; var++)
 #define all(x) x.begin(), x.end()
 #define ulli unsigned long long int
 #define ull unsigned long long
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,m,k;
-    cin>>n>>m>>k;
-    int a[n];
+    ll n;
+    cin>>n;
+    vector<ll> a(n);
     rep(i,0,n) {cin>>a[i];}
-    int b[m];
-    rep(i,0,m) {cin>>b[i];}
-    sort(a,a+n);
-    sort(b,b+m);
-    int j=0;
-    int i=0;
-    int cnt=0;
-    while(1) {
-        if (abs(a[i]-b[j]) <= k) {i++; j++; cnt++;} else {
-            if (a[i]>b[j]) {j++;} else {i++;}
-        }
-        if (i==n || j==m) {break;}
+    map<ll,ll> pos;
+    map<ll,bool> seen;
+    ll recent=-1;
+    ll ans=0;
+    rep(i,0,n) {
+        if (seen[a[i]]) {recent=max(recent,pos[a[i]]);} else {seen[a[i]]=1;}
+        pos[a[i]]=i;
+        ans += (i-recent);
     }
-    cout<<cnt<<endl;
+    cout<<ans;
+    
 }
 
 int main() {

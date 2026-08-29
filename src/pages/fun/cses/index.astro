@@ -18,10 +18,16 @@ const allTopics = Array.from(new Set(entries.flatMap(e => e.topics || (e.topic ?
     <header class="page-header">
       <h1 class="page-title">CSES Problem Set</h1>
       <p class="page-subtitle">
-        I like to do CSES sometimes. Here's a (probably incomplete) list of whatever I solved.
+        I like to do CSES sometimes. Here's a (probably incomplete) list of whatever I solved —
+        the Sorting and Searching section is fully up to date.
+      </p>
+      <p class="page-subtitle mt-2">
+        Equivalently, you can browse the solutions directly in the
+        <a href="https://github.com/TheAlphaJas/cses-sols" target="_blank" rel="noopener noreferrer" class="link">cses-sols</a>
+        repository on GitHub.
       </p>
     </header>
-    
+
     {entries.length > 0 ? (
       <>
         <!-- Search and Filter -->

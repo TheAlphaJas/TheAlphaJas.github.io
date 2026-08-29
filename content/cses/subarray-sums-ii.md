@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Subarray Sums II"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Same prefix-sum-and-hashmap approach as Subarray Sums I, extended to arrays with negative values."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Subarray_Sums_II.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,24 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
-        }
+    ll n, k;
+    cin>>n>>k;
+    vector<ll> a(n);
+    rep(i,0,n) {cin>>a[i];}
+    vector<ll> pf(n);
+    pf[0]=a[0];
+    rep(i,1,n-1) {
+        pf[i]+=(pf[i-1]+a[i]);
     }
-    cout<<ans<<endl;
+    map<ll,ll> mp;
+    mp[pf[n-1]]++;
+    lli z{0};
+    for(int i = n-2;i>=0;i--) {
+        z+=(mp[pf[i]+k]);
+        mp[pf[i]]++;
+    }
+    z+=mp[k];
+    cout<<z<<endl;
 }
 
 int main() {

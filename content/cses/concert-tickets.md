@@ -5,9 +5,9 @@ difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Solution implementation"
+keyIdea: "Keep ticket prices in a multiset and use upper_bound to find the most expensive ticket within each customer’s budget."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Concert_Tickets.cpp"
 ---
 
 ## Solution
@@ -28,18 +28,20 @@ bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b
 void solve() {
     int n,m;
     cin>>n>>m;
-    int a[n], b[m];
-    rep(i,0,n) {cin>>a[i];}
-    rep(i,0,m) {cin>>b[i];}
     multiset<int> S;
-    rep(i,0,n) {S.insert(-a[i]);}
+    int k;
+    rep(i,0,n) {cin>>k; S.insert(k);}
     rep(i,0,m) {
-        auto it = S.lower_bound(-b[i]);
-        if (it == S.end()) {cout<<"-1\n"; continue;}
-        cout<<-1*(*it)<<endl;
-        S.erase(it);
-    }
+        cin>>k;
+        auto it = S.upper_bound(k);
+        if (it == S.begin()) {cout<<"-1\n";} else {
+            it--;
+            cout<<*it<<endl;
+            S.erase(it);
+        }
+    }      
 }
+
 int main() {
     //add quotes incase input output file
     //freopen(input.txt,r,stdin);

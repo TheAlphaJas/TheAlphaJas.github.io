@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Josephus Problem I"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Simulate directly with an ordered set of survivors, walking k steps forward before each elimination."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Josephus_Problem_I.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,24 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
+    int n;
+    cin>>n;
+    set<int> S;
+    rep(i,1,n) {S.insert(i);}
+    int k=2;
+    auto it = S.find(k);
+    while(!S.empty()) {
+        cout<<*it<<" ";
+        int t = *it;
+        it++;
+        S.erase(t);
+        if (S.size()==0) {break;}
+        if (it==S.end()) {it = S.begin();}
+        rep(j,0,k-1) {
+        it++;
+        if (it==S.end()) {it = S.begin();}
         }
-    }
-    cout<<ans<<endl;
+    }     
 }
 
 int main() {

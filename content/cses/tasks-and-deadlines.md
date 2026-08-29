@@ -1,13 +1,13 @@
 ---
-problemName: "Ferris Wheel"
+problemName: "Tasks and Deadlines"
 problemNumber: ""
 difficulty: "Easy"
 topic: "Sorting and Searching"
 topics:
   - "Sorting and Searching"
-keyIdea: "Two-pointer greedy: try to pair the lightest remaining person with the heaviest, otherwise seat the heaviest alone."
+keyIdea: "Greedy: sort tasks by duration and process the shortest first to maximize total points from finish times."
 language: "C++"
-github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Ferris_Wheel.cpp"
+github: "https://github.com/TheAlphaJas/cses-sols/blob/main/Sorting%20and%20Searching/Tasks_and_Deadlines.cpp"
 ---
 
 ## Solution
@@ -26,28 +26,16 @@ using namespace std;
 bool sortbysec(const pair<ll,ll> &a,const pair<ll,ll> &b) { return (a.second < b.second); }
 
 void solve() {
-    int n,x;
-    cin>>n>>x;
-    int ans=0;
-    int k;
-    multiset<int> S;
-    rep(i,0,n) {cin>>k; S.insert(k);}
-    while(S.size()>0) {
-        auto start = S.begin();
-        auto huh = S.upper_bound(x - *start);
-        if (huh!=S.begin()) {huh--;
-        if (huh!=S.begin()) {
-        S.erase(huh);
-        S.erase(S.begin());
-        ans++;} else {
-            ans++;
-            S.erase(huh);
-        } } else {
-            ans++;
-            S.erase(huh);
-        }
-    }
-    cout<<ans<<endl;
+    int n;
+    cin>>n;
+    ll a[n], b[n];
+    rep(i,0,n) {cin>>a[i]>>b[i];}
+    sort(a,a+n);
+    lli s=0;
+    lli s2=0;
+    rep(i,0,n) {s+=((n-i)*a[i]); s2+=b[i];}
+    // cout<<s<<" "<<s2<<endl;
+    cout<<s2-s;
 }
 
 int main() {

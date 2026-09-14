@@ -13,6 +13,31 @@ const profilePic = fs.existsSync(imgDir)
       .map((f) => `/img/${f}`)[0]
   : undefined;
 
+// Structured data (schema.org Person) so search engines associate this page
+// with the name "Jasmer Singh Sanjotra" as an entity, and link it to the
+// same-person profiles elsewhere (GitHub, LinkedIn, Scholar).
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Jasmer Singh Sanjotra',
+  url: 'https://TheAlphaJas.github.io/',
+  jobTitle: 'Research Intern',
+  worksFor: {
+    '@type': 'CollegeOrUniversity',
+    name: 'IIT Kharagpur',
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'IIT Indore',
+  },
+  ...(profilePic && { image: `https://TheAlphaJas.github.io${profilePic}` }),
+  sameAs: [
+    'https://github.com/TheAlphaJas',
+    'https://scholar.google.com/citations?hl=en&user=NUCuUbIAAAAJ',
+    'https://www.linkedin.com/in/jasmer-singh-sanjotra-a05b95250',
+  ],
+};
+
 const news = [
   {
     date: 'Aug 2026',
@@ -41,6 +66,7 @@ const news = [
   title="Jasmer Singh Sanjotra"
   description="Jasmer Singh Sanjotra — research on causal reinforcement learning, world models, and machine learning for speech and signals."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <header class="mb-10">
       <h1 class="page-title">Jasmer Singh Sanjotra</h1>

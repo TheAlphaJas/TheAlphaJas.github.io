@@ -1,0 +1,14 @@
+https://www.quantguide.io/questions/dicecoin-paradigm
+
+First for some n, lets find the prob that we see atleast one 1.
+
+this is simply 1 - (no 1 at all in n rolls)
+= 1 - (5/6)^n.
+
+now, this will happen for some n. 
+whats the prob for a n?
+first n-1 terms we have H, then 1 T. prob of this? (1/2)^n-1 * (1/2) = (1/2)^n.
+
+so both happening? multiple them. then sum from n = 0 to inf.. coz it could happen for any n.. so we add.
+
+infinite GP sum, we get 2 - 12/7 = 2/7. ans.

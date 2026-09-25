@@ -16,15 +16,15 @@ Consider the set $$\Omega = \{1, 2, \dots, 20\}$$. Two subsets $$A$$ and $$B$$ o
 
 ### Step 1: Set up the distribution of $$N$$
 
-We first need $$P(N = k)$$ — the probability that $$A$$ and $$B$$ overlap in exactly $$k$$ elements.
+We first need $$P(N = k)$$, the probability that $$A$$ and $$B$$ overlap in exactly $$k$$ elements.
 
-To build such a pair $$(A, B)$$: choose which $$k$$ of the $$20$$ elements are the common ones — that's $$\binom{20}{k}$$ ways. For the remaining $$20 - k$$ elements, none of them may end up in *both* sets (otherwise the overlap would exceed $$k$$), so we need to count: in how many ways can the leftover elements be split between $$A$$ and $$B$$ so that no leftover element lands in both?
+To build such a pair $$(A, B)$$: choose which $$k$$ of the $$20$$ elements are the common ones: that's $$\binom{20}{k}$$ ways. For the remaining $$20 - k$$ elements, none of them may end up in *both* sets (otherwise the overlap would exceed $$k$$), so we need to count: in how many ways can the leftover elements be split between $$A$$ and $$B$$ so that no leftover element lands in both?
 
-### Step 2: A subproblem — mutually exclusive subsets
+### Step 2: A subproblem on mutually exclusive subsets
 
 Define $$N(n) = $$ the number of ways to choose two subsets of an $$n$$-element set that share **no** elements (i.e. two mutually exclusive subsets, either of which may be empty). Two different lines of reasoning both nail this down.
 
-**First way — sum over the size of the first subset.** Suppose the first subset takes $$j$$ of the $$n$$ elements ($$j$$ can range from $$0$$ to $$n$$); there are $$\binom{n}{j}$$ ways to pick which. The second subset must then live entirely inside the remaining $$n - j$$ elements, and can be *any* subset of those — $$2^{n-j}$$ choices. So
+**First way: sum over the size of the first subset.** Suppose the first subset takes $$j$$ of the $$n$$ elements ($$j$$ can range from $$0$$ to $$n$$); there are $$\binom{n}{j}$$ ways to pick which. The second subset must then live entirely inside the remaining $$n - j$$ elements, and can be *any* subset of those: $$2^{n-j}$$ choices. So
 
 $$
 N(n) = \sum_{j=0}^{n} \binom{n}{j}\, 2^{\,n-j}
@@ -36,13 +36,13 @@ $$
 N(n) = \sum_{j=0}^n \binom{n}{j}\, 2^{n-j}\, 1^{j} = (2+1)^n = 3^n
 $$
 
-**Second way — go element by element.** Instead of thinking in terms of subset sizes, just decide the fate of each of the $$n$$ elements independently: it can go into the first subset, into the second subset, or into neither (a subset doesn't need to contain every element). That's $$3$$ choices per element, and $$n$$ independent elements, so directly
+**Second way: go element by element.** Instead of thinking in terms of subset sizes, just decide the fate of each of the $$n$$ elements independently: it can go into the first subset, into the second subset, or into neither (a subset doesn't need to contain every element). That's $$3$$ choices per element, and $$n$$ independent elements, so directly
 
 $$
 N(n) = 3^n
 $$
 
-Both routes agree — reassuringly, since they're counting the exact same thing.
+Both routes agree, reassuringly, since they're counting the exact same thing.
 
 ### Step 3: The distribution of $$N$$
 
@@ -52,7 +52,7 @@ $$
 \text{Numerator (favorable pairs with exactly } k \text{ common elements)} = \binom{20}{k}\, 3^{20-k}
 $$
 
-The denominator is the total number of ways to pick $$(A, B)$$ with no restriction — each of $$A$$, $$B$$ independently has $$2^{20}$$ possible values, so $$2^{20}\cdot 2^{20} = 4^{20}$$ total pairs. Hence
+The denominator is the total number of ways to pick $$(A, B)$$ with no restriction: each of $$A$$, $$B$$ independently has $$2^{20}$$ possible values, so $$2^{20}\cdot 2^{20} = 4^{20}$$ total pairs. Hence
 
 $$
 P(N = k) = \frac{\binom{20}{k}\, 3^{20-k}}{4^{20}}
@@ -134,7 +134,7 @@ $$
 P(X_i = 1) = P(i \in A)\cdot P(i \in B) = \frac12\cdot\frac12 = \frac14 \quad \Longrightarrow \quad X_i \sim \text{Bernoulli}\!\left(\tfrac14\right)
 $$
 
-and since membership is decided independently *across* elements too, $$X_1, \dots, X_{20}$$ are i.i.d. Bernoulli$$(\tfrac14)$$. Now $$N = |A \cap B| = \sum_{i=1}^{20} X_i$$ is literally a sum of $$20$$ i.i.d. Bernoulli$$(\tfrac14)$$ trials — which is exactly the definition of $$N \sim \text{Binomial}(20, \tfrac14)$$, with no need to have derived the $$\binom{20}{k}3^{20-k}/4^{20}$$ formula at all.
+and since membership is decided independently *across* elements too, $$X_1, \dots, X_{20}$$ are i.i.d. Bernoulli$$(\tfrac14)$$. Now $$N = |A \cap B| = \sum_{i=1}^{20} X_i$$ is literally a sum of $$20$$ i.i.d. Bernoulli$$(\tfrac14)$$ trials, which is exactly the definition of $$N \sim \text{Binomial}(20, \tfrac14)$$, with no need to have derived the $$\binom{20}{k}3^{20-k}/4^{20}$$ formula at all.
 
 From here $$E[N]$$ and $$\text{Var}(N)$$ follow from the single-trial moments, without touching a binomial coefficient. For a single Bernoulli$$(p)$$ trial, $$E[X_i] = p$$ and $$\text{Var}(X_i) = E[X_i^2] - E[X_i]^2 = p - p^2 = p(1-p)$$ (using $$X_i^2 = X_i$$, since $$X_i \in \{0,1\}$$). Linearity of expectation, and additivity of variance across *independent* summands, then give
 
@@ -148,6 +148,6 @@ $$
 \frac{\text{Var}(N)}{E[N]} = \frac{20\,p(1-p)}{20\,p} = 1 - p
 $$
 
-With $$p = \tfrac14$$, that's $$1 - \tfrac14 = \tfrac34$$ — matching Step 6 exactly, but now visibly true for *any* ground set size (not just $$20$$), since $$n$$ never even appears in the final ratio. The long derivation above (via $$P(N=k)$$ and differentiating generating functions) rebuilds all of this from first principles; recognizing the Bernoulli/Binomial structure up front just lets you skip straight to the answer.
+With $$p = \tfrac14$$, that's $$1 - \tfrac14 = \tfrac34$$, matching Step 6 exactly, but now visibly true for *any* ground set size (not just $$20$$), since $$n$$ never even appears in the final ratio. The long derivation above (via $$P(N=k)$$ and differentiating generating functions) rebuilds all of this from first principles; recognizing the Bernoulli/Binomial structure up front just lets you skip straight to the answer.
 
 ### Thus, $$\dfrac{\text{Var}(N)}{E[N]} = \dfrac{3}{4}$$

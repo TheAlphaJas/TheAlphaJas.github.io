@@ -26,6 +26,7 @@ const allTopics = Array.from(new Set(entries.flatMap(e => e.topics || (e.topic ?
         <a href="https://github.com/TheAlphaJas/cses-sols" target="_blank" rel="noopener noreferrer" class="link">cses-sols</a>
         repository on GitHub.
       </p>
+      <p class="text-sm text-muted mt-2 font-mono">{entries.length} problems solved so far.</p>
     </header>
 
     {entries.length > 0 ? (

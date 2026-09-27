@@ -201,5 +201,5 @@ Then look at it on the dev server.
 
 - Pushing to `main` deploys via `.github/workflows/deploy.yml` (GitHub Actions ->
   Pages). Nothing reaches the live site until it is on `main`.
-- Commit or push only when the user asks. Work on a `claude/<topic>` branch and
-  open a PR, matching earlier merges; the user sometimes commits content directly.
+- Commit or push only when the user asks. When they do, commit to `main` and
+  push directly; the user does not want PRs or feature branches for this site.

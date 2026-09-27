@@ -86,6 +86,12 @@ Optional one-paragraph framing.
 - Existing posts use no Markdown tables; prefer bullet lists.
 - Math renders via `src/utils/markdown.ts` (remark-math + rehype-katex,
   `output: 'html'`), not the Astro markdown config.
+- KaTeX's stylesheet is imported from the installed `katex` package in
+  `BaseLayout.astro` (not a CDN), so it always matches the renderer version.
+- `.katex-display` in `src/styles/global.css` scrolls horizontally, which forces
+  vertical clipping; its vertical padding is what keeps tall glyphs (fraction
+  numerators, `\dfrac`, big operators) from having their tops cut off. Don't
+  remove that padding. Before it was added, 236 of 349 display equations clipped.
 
 ## Other content types
 

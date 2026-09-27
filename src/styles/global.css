@@ -133,8 +133,13 @@ html.dark {
   font-size: 1.05em;
 }
 
+/* Wide equations scroll sideways instead of overflowing the page. Scrolling
+   on x forces clipping on y, and KaTeX's boxes are tight enough that tall
+   glyphs (fraction numerators, big operators, \dfrac) poke past them, so the
+   padding gives them room rather than letting their tops get cut off. */
 .katex-display {
   margin: 1.5em 0;
+  padding: 0.5em 0.25em;
   overflow-x: auto;
   overflow-y: hidden;
 }

@@ -1,6 +1,10 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+// From the installed katex package (not a CDN) so the stylesheet always
+// matches the version rehype-katex renders with. Before global.css so the
+// site's overrides win.
+import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 
 import { AUTHOR_NAME } from '../utils/seo';
@@ -74,8 +78,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
 
-    <!-- KaTeX CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 
     <title>{title}</title>
 

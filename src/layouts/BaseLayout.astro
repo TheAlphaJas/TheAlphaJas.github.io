@@ -3,14 +3,31 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+import { AUTHOR_NAME } from '../utils/seo';
+
 interface Props {
   title: string;
   description?: string;
+  /** 'article' for individual writeups; everything else is a 'website'. */
+  ogType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  tags?: string[];
+  /** schema.org objects, each emitted as its own JSON-LD script. */
+  jsonLd?: object[];
+  /** Plain-Markdown version of this page, for agents and scrapers. */
+  markdownPath?: string;
 }
 
 const {
   title,
   description = 'Jasmer Singh Sanjotra — research on causal reinforcement learning, world models, and machine learning for speech and signals.',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  jsonLd = [],
+  markdownPath,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -22,13 +39,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="author" content={AUTHOR_NAME} />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Machine-readable alternates: feed, agent index, Markdown source -->
+    <link rel="alternate" type="application/rss+xml" title={`${AUTHOR_NAME}: blogs and probability`} href="/rss.xml" />
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+    {markdownPath && <link rel="alternate" type="text/markdown" title="Markdown source" href={markdownPath} />}
+
     <!-- OpenGraph -->
+    <meta property="og:site_name" content={AUTHOR_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+    {ogType === 'article' && <meta property="article:author" content={AUTHOR_NAME} />}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    {jsonLd.map((data) => <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />)}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />

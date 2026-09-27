@@ -2,6 +2,9 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getUSACOEntries } from '../../../utils/content';
 import { renderMarkdown } from '../../../utils/markdown';
+import { gitDates } from '../../../utils/git-dates.mjs';
+import { usacoKeyIdea } from '../../../utils/markdown-export';
+import { articleLd, breadcrumbLd } from '../../../utils/seo';
 
 export async function getStaticPaths() {
   const entries = getUSACOEntries();
@@ -13,9 +16,43 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const htmlContent = await renderMarkdown(entry.content);
+
+const path = `/fun/usaco/${entry.slug}/`;
+const markdownPath = `/fun/usaco/${entry.slug}.md`;
+const keyIdea = usacoKeyIdea(entry.keyIdea);
+const description = [`${entry.contest} "${entry.problemName}" solution in ${entry.language}`, keyIdea]
+  .filter(Boolean)
+  .join('. ') + '.';
+const dates = gitDates(`content/usaco/${entry.slug}.md`);
+const jsonLd = [
+  articleLd({
+    type: 'TechArticle',
+    headline: `USACO ${entry.problemName} solution`,
+    description,
+    path,
+    keywords: ['USACO', entry.difficulty].filter(Boolean),
+    datePublished: dates?.created,
+    dateModified: dates?.modified,
+    markdownPath,
+  }),
+  breadcrumbLd([
+    { name: 'Fun Stuff', path: '/fun/' },
+    { name: 'USACO', path: '/fun/usaco/' },
+    { name: entry.problemName, path },
+  ]),
+];
 ---
 
-<BaseLayout title={`${entry.problemName} | USACO`} description={`USACO problem: ${entry.problemName}`}>
+<BaseLayout
+  title={`${entry.problemName} | USACO ${entry.difficulty} Solution`}
+  description={description}
+  ogType="article"
+  publishedTime={dates?.created}
+  modifiedTime={dates?.modified}
+  tags={['USACO', entry.difficulty].filter(Boolean)}
+  jsonLd={jsonLd}
+  markdownPath={markdownPath}
+>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="flex items-center gap-4 mb-6">
       <a href="/fun" class="text-muted hover:text-accent inline-flex items-center space-x-2">
@@ -59,6 +96,10 @@ const htmlContent = await renderMarkdown(entry.content);
         <div set:html={htmlContent} />
       </div>
     </article>
+
+    <p class="mt-12 text-sm text-muted">
+      <a href={markdownPath} class="hover:text-accent">View as Markdown</a>
+    </p>
   </div>
 </BaseLayout>
 

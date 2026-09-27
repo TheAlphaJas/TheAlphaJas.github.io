@@ -1,15 +1,23 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getProbabilityProblems } from '../../../utils/content';
+import { collectionLd } from '../../../utils/seo';
 
 const problems = getProbabilityProblems();
 const allTopics = Array.from(new Set(problems.flatMap((p) => p.topics))).sort();
+
+const description = `Step-by-step solutions to ${problems.length} probability puzzles, mostly from QuantGuide: expectation, conditioning, combinatorics, recursion and more.`;
+const jsonLd = [
+  collectionLd({
+    name: 'Probability Corner',
+    description,
+    path: '/fun/probability/',
+    items: problems.map((p) => ({ name: p.title, path: `/fun/probability/${p.slug}/` })),
+  }),
+];
 ---
 
-<BaseLayout
-  title="Probability Corner | Jasmer Singh Sanjotra"
-  description="Probability puzzles with detailed solutions."
->
+<BaseLayout title="Probability Corner | Jasmer Singh Sanjotra" description={description} jsonLd={jsonLd}>
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <a href="/fun" class="text-sm text-muted hover:text-accent transition-colors inline-flex items-center gap-2 mb-8">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

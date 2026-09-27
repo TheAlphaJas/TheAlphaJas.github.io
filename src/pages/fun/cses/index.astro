@@ -1,12 +1,23 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCSESEntries } from '../../../utils/content';
+import { collectionLd } from '../../../utils/seo';
 
 const entries = getCSESEntries();
 const allTopics = Array.from(new Set(entries.flatMap(e => e.topics || (e.topic ? [e.topic] : [])))).sort();
+
+const description = `C++ solutions and key ideas for ${entries.length} CSES Problem Set problems, including the full Sorting and Searching section.`;
+const jsonLd = [
+  collectionLd({
+    name: 'CSES Problem Set solutions',
+    description,
+    path: '/fun/cses/',
+    items: entries.map((e) => ({ name: e.problemName, path: `/fun/cses/${e.slug}/` })),
+  }),
+];
 ---
 
-<BaseLayout title="CSES Problem Set | Jasmer Singh Sanjotra" description="CSES Problem Set solutions and key insights.">
+<BaseLayout title="CSES Problem Set Solutions | Jasmer Singh Sanjotra" description={description} jsonLd={jsonLd}>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <a href="/fun" class="text-muted hover:text-accent mb-6 inline-flex items-center space-x-2">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

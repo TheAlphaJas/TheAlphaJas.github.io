@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://TheAlphaJas.github.io/sitemap-index.xml
+# AI agents: /llms.txt indexes the site, /llms-full.txt has every writeup as
+# Markdown, and each writeup page has a raw Markdown twin at the same path
+# with ".md" appended (e.g. /fun/probability/power-grid.md).
 
+Sitemap: https://TheAlphaJas.github.io/sitemap-index.xml

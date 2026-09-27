@@ -1,8 +1,17 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getBlogPosts } from '../../../utils/content';
+import { collectionLd } from '../../../utils/seo';
 
 const posts = getBlogPosts();
+const jsonLd = [
+  collectionLd({
+    name: 'Blogs',
+    description: 'Small writeups about whatever I found interesting.',
+    path: '/fun/blogs/',
+    items: posts.map((p) => ({ name: p.title, path: `/fun/blogs/${p.slug}/` })),
+  }),
+];
 
 const formatDate = (date?: string) =>
   date
@@ -15,7 +24,7 @@ const formatDate = (date?: string) =>
     : '';
 ---
 
-<BaseLayout title="Blogs | Jasmer Singh Sanjotra" description="Small writeups about whatever I found interesting.">
+<BaseLayout title="Blogs | Jasmer Singh Sanjotra" description="Small writeups about whatever I found interesting." jsonLd={jsonLd}>
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <a href="/fun" class="text-sm text-muted hover:text-accent transition-colors inline-flex items-center gap-2 mb-8">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

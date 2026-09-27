@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history: page dates (sitemap lastmod, RSS, article metadata)
+          # come from git, and a shallow clone would stamp everything "today".
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
